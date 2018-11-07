@@ -47,11 +47,17 @@
 			style="@style/Widget.AppCompat.Button.Colored"
 			android:id="@+id/login_register_button" />
 	</LinearLayout>
-			<Button
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true">
+		<Button
 			android:text="Forgot password"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			style="@style/Widget.AppCompat.Button.Borderless.Colored"
 			android:id="@+id/login_forgotPassword_button"
 			android:layout_alignParentBottom="true"/>
+	</LinearLayout>
 </RelativeLayout>

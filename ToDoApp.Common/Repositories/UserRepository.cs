@@ -16,11 +16,14 @@ namespace ToDoApp.Common.Repositories
         public bool CreateUser(User model)
         {
             var realm = Realm.GetInstance(_databasePath);
-            realm.WriteAsync(r => { r.Add(model); });
+
+            var id = realm.All<User>()?.LastOrDefault()?.Id ?? 0;
+            model.Id = ++id;
+
+            realm.Write(() => { realm.Add(model); });
             return true;
         }
-
-
+        
         public User Login(string email, string password)
         {
             var realm = Realm.GetInstance(_databasePath);
@@ -36,14 +39,14 @@ namespace ToDoApp.Common.Repositories
         public bool UpdateUser(User model)
         {
             var realm = Realm.GetInstance(_databasePath);
-            realm.WriteAsync(r => { r.Add(model, true); });
+            realm.Write(() => { realm.Add(model, true); });
             return true;
         }
 
         public bool DeleteUser(User model)
         {
             var realm = Realm.GetInstance(_databasePath);
-            realm.WriteAsync(r => { r.Remove(model); });
+            realm.Write(() => { realm.Remove(model); });
             return true;
         }
     }

@@ -1,42 +1,23 @@
 ﻿using Android.App;
 using Android.Content;
-using ToDoApp.Activities;
 
 namespace ToDoApp.Presenters
 {
     public class StartPresenter : BasePresenter
     {
-        private readonly ISharedPreferences _sp;
-
         public StartPresenter(Activity activity)
         {
-            Activity = activity;
-            _sp = activity.GetPreferences(FileCreationMode.Private);
-
-            StartNextActivity();
+            SharedPreferences = activity.GetPreferences(FileCreationMode.Private);
         }
 
-        private void StartNextActivity()
+        public bool CheckLoggedUser()
         {
-            if (CheckLoggedUser())
-            {
-                InitUser();
-                Activity.StartActivity(typeof(MainActivity));
-            }
-            else
-            {
-                Activity.StartActivity(typeof(LoginActivity));
-            }
+            return SharedPreferences.Contains("loggedUser");
         }
 
-        private bool CheckLoggedUser()
+        public void InitUser()
         {
-            return _sp.Contains("loggedUser");
-        }
-
-        private void InitUser()
-        {
-            var email = _sp.GetString("loggedUser", string.Empty);
+            var email = SharedPreferences.GetString("loggedUser", string.Empty);
             User = Repository.GetUser(email);
         }
     }

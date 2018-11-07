@@ -1,58 +1,46 @@
-﻿using System;
-using Android.App;
-using Android.Support.Design.Widget;
-using Android.Views;
-using Android.Widget;
-using ToDoApp.Activities;
-using Snackbar = Android.Support.Design.Widget.Snackbar;
+﻿using ToDoApp.Activities.Authorize;
+using ToDoApp.Activities.Interfaces;
+using ToDoApp.Common.Models;
 
 namespace ToDoApp.Presenters
 {
     public class LoginPresenter : BasePresenter
     {
-        public LoginPresenter(Activity activity)
+        private ILoginView _view;
+
+        public LoginPresenter(ILoginView view)
         {
-            Activity = activity;
-            InitButtons();
+            _view = view;
         }
 
-        private void InitButtons()
+        public void DetachView()
         {
-            var loginButton = Activity.FindViewById<Button>(Resource.Id.login_login_button);
-            var forgotPasswordButton = Activity.FindViewById<Button>(Resource.Id.login_forgotPassword_button);
-            var registerButton = Activity.FindViewById<Button>(Resource.Id.login_register_button);
-
-            loginButton.Click += Login;
-            forgotPasswordButton.Click += GoToForgotPasswordPage;
-            registerButton.Click += GoToRegister;
+            _view = null;
         }
 
-        private void GoToRegister(object sender, EventArgs eventArgs)
+        public void SendLogin()
         {
-            Activity.StartActivity(typeof(RegisterActivity));
-        }
+            var model = _view.GetData();
 
-        private void GoToForgotPasswordPage(object sender, EventArgs eventArgs)
-        {
-            Activity.StartActivity(typeof(ForgotPasswordActivity));
-        }
+            var user = Login(model.Email, model.Password);
 
-        private void Login(object sender, EventArgs eventArgs)
-        {
-            var email = Activity.FindViewById<EditText>(Resource.Id.login_email);
-            var password = Activity.FindViewById<EditText>(Resource.Id.login_password);
-
-            var user = Repository.Login(email.Text, password.Text);
-
-            if (user != null)
+            if (user == null)
             {
-                User = user;
-                Activity.StartActivity(typeof(MainActivity));
+                _view.ShowSnackBar("Invalid password or email");
+                return;
             }
-            else
-            {
-                //TODO: Display snackbar invalid email or password
-            }
+
+            User = user;
+            var email = user.Email;
+            SharedPreferences.Edit().PutString("loggedUser", email).Apply();
+
+            _view.SendSuccess();
+        }
+
+        private User Login(string email, string password)
+        {
+            return Repository.Login(email, password);
+            
         }
     }
 }

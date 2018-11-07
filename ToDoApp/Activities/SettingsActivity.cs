@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
+using ToDoApp.Presenters;
 
 namespace ToDoApp.Activities
 {
@@ -10,7 +11,8 @@ namespace ToDoApp.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_settings);
-            // Create your application here
+
+            var presenter = new SettingsPresenter(this);
         }
     }
 }

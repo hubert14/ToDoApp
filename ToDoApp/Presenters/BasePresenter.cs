@@ -1,13 +1,13 @@
-﻿using Android.App;
+﻿using Android.Content;
 using ToDoApp.Common.Models;
 using ToDoApp.Common.Repositories;
 
 namespace ToDoApp.Presenters
 {
-    public class BasePresenter
+    public abstract class BasePresenter
     {
-        protected Activity Activity;
-        protected static UserRepository Repository = new UserRepository();
+        protected static ISharedPreferences SharedPreferences;
+        protected static readonly UserRepository Repository = new UserRepository();
         protected static User User;
     }
 }

@@ -6,29 +6,96 @@ using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
+using Android.Widget;
+using ToDoApp.Activities.Interfaces;
+using ToDoApp.Presenters;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace ToDoApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
-    public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
+    public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener, IMainView
     {
+        private MainPresenter _presenter;
+
+        private TextView _headerEmail;
+        private TextView _headerName;
+
+        private DrawerLayout _drawer;
+        private Toolbar _toolbar;
+        private NavigationView _navigationView;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
+            Initialize();
+        }
 
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
+        #region Initialization
+        private void Initialize()
+        {
+            _presenter = new MainPresenter(this);
 
-            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
-            drawer.AddDrawerListener(toggle);
+            InitToolbar();
+            InitNavigationHeader();
+            InitFab();
+            InitDrawer();
+            InitNavigationViewListener();
+
+            _presenter.GetUserInfo();
+        }
+
+        private void InitNavigationViewListener()
+        {
+            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            _navigationView.SetNavigationItemSelectedListener(this);
+        }
+
+        private void InitToolbar()
+        {
+            _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(_toolbar);
+        }
+
+        private void InitDrawer()
+        {
+            _drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, _drawer, _toolbar, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
+            _drawer.AddDrawerListener(toggle);
             toggle.SyncState();
 
-            NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-            navigationView.SetNavigationItemSelectedListener(this);
+        }
+
+        private void InitNavigationHeader()
+        {
+            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            var header = _navigationView.GetHeaderView(0);
+
+            _headerEmail = header.FindViewById<TextView>(Resource.Id.nav_header_email);
+            _headerName = header.FindViewById<TextView>(Resource.Id.nav_header_userName);
+        }
+
+        private void InitFab()
+        {
+            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
+            fab.Click += FabOnClick;
+        }
+
+        #endregion
+
+        private void FabOnClick(object sender, EventArgs eventArgs)
+        {
+            View view = (View)sender;
+            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
+                .SetAction("Action", (View.IOnClickListener)null).Show();
+            // TODO: Create task action
+        }
+
+        public void SendUserInfo(string email, string name)
+        {
+            _headerEmail.Text = email;
+            _headerName.Text = name;
         }
 
         public override void OnBackPressed()
@@ -61,13 +128,6 @@ namespace ToDoApp.Activities
             return base.OnOptionsItemSelected(item);
         }
 
-        private void FabOnClick(object sender, EventArgs eventArgs)
-        {
-            View view = (View) sender;
-            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
-        }
-
         public bool OnNavigationItemSelected(IMenuItem item)
         {
             int id = item.ItemId;
@@ -97,8 +157,7 @@ namespace ToDoApp.Activities
 
             }
 
-            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            drawer.CloseDrawer(GravityCompat.Start);
+            _drawer.CloseDrawer(GravityCompat.Start);
             return true;
         }
     }

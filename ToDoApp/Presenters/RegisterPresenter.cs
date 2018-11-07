@@ -1,18 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.App;
+using ToDoApp.Activities;
+using ToDoApp.Common.Models;
 
 namespace ToDoApp.Presenters
 {
-    class RegisterPresenter
+    public class RegisterPresenter : BasePresenter
     {
+        public RegisterPresenter(Activity activity)
+        {
+            Activity = activity;
+        }
+
+        private void RegisterUser(User user)
+        {
+            var isCreated = Repository.CreateUser(user);
+            if (!isCreated) return;
+
+            User = Repository.GetUser(user.Email);
+            StartMainActivity();
+        }
+
+        private void StartMainActivity()
+        {
+            Activity.Finish();
+            Activity.StartActivity(typeof(MainActivity));
+        }
     }
 }

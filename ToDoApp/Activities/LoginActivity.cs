@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using Android.Support.V7.App;
+using ToDoApp.Presenters;
 
-namespace ToDoApp
+namespace ToDoApp.Activities
 {
-    [Activity(Label = "LoginActivity")]
-    public class LoginActivity : Activity
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
+    public class LoginActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your application here
+            SetContentView(Resource.Layout.activity_login);
+            var presenter = new LoginPresenter(this);
         }
     }
 }

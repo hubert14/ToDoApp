@@ -20,6 +20,13 @@ namespace ToDoApp.Common.Repositories
             return true;
         }
 
+
+        public User Login(string email, string password)
+        {
+            var realm = Realm.GetInstance(_databasePath);
+            return realm.All<User>().FirstOrDefault(x => x.Email == email && x.Password == password);
+        }
+
         public User GetUser(string email)
         {
             var realm = Realm.GetInstance(_databasePath);

@@ -44,7 +44,7 @@ namespace ToDoApp.Presenters
 
             if (RegisterUser(user))
             {
-                User = Repository.GetUser(user.Email);
+                User = UserRepository.GetUser(user.Email);
                 SharedPreferences.Edit().PutString("loggedUser", user.Email).Apply(); ;
 
                 _view.SendSuccess();
@@ -54,7 +54,7 @@ namespace ToDoApp.Presenters
 
         private bool CheckEmailFree(string email)
         {
-            var user = Repository.GetUser(email);
+            var user = UserRepository.GetUser(email);
             return user == null;
         }
 
@@ -65,10 +65,10 @@ namespace ToDoApp.Presenters
 
         private bool RegisterUser(User user)
         {
-            var isCreated = Repository.CreateUser(user);
+            var isCreated = UserRepository.CreateUser(user);
             if (!isCreated) return false;
 
-            User = Repository.GetUser(user.Email);
+            User = UserRepository.GetUser(user.Email);
             return true;
         }
     }

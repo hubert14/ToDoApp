@@ -7,5 +7,7 @@ namespace ToDoApp.Common.Models
         [PrimaryKey] public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public RealmList<UserTask> UserTasks { get; }
     }
 }

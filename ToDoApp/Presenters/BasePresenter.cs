@@ -7,7 +7,15 @@ namespace ToDoApp.Presenters
     public abstract class BasePresenter
     {
         protected static ISharedPreferences SharedPreferences;
-        protected static readonly UserRepository Repository = new UserRepository();
+        protected static UserRepository UserRepository { get; private set; }
+        protected static TaskListRepository TaskListRepository { get; private set; }
+
         protected static User User;
+
+        protected static void InitRepositories()
+        {
+            UserRepository = new UserRepository();
+            TaskListRepository = new TaskListRepository(User.Id);
+        }
     }
 }

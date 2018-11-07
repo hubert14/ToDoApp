@@ -2,6 +2,6 @@
 {
     public interface IMainView
     {
-        void SendUserInfo(string email, string name);
+        void ShowUserInfo(string email, string name);
     }
 }

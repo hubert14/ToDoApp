@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Support.Design.Widget;
@@ -8,6 +9,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using ToDoApp.Activities.Interfaces;
+using ToDoApp.Common.Models;
 using ToDoApp.Presenters;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
@@ -92,7 +94,7 @@ namespace ToDoApp.Activities
             // TODO: Create task action
         }
 
-        public void SendUserInfo(string email, string name)
+        public void ShowUserInfo(string email, string name)
         {
             _headerEmail.Text = email;
             _headerName.Text = name;
@@ -119,9 +121,11 @@ namespace ToDoApp.Activities
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            int id = item.ItemId;
+            var id = item.ItemId;
+
             if (id == Resource.Id.action_settings)
             {
+                StartActivity(typeof(SettingsActivity));
                 return true;
             }
 

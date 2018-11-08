@@ -1,4 +1,5 @@
-﻿using ToDoApp.Activities.Authorize;
+﻿using System.Collections.Generic;
+using ToDoApp.Activities.Authorize;
 using ToDoApp.Activities.Interfaces;
 using ToDoApp.Common.Models;
 
@@ -34,7 +35,7 @@ namespace ToDoApp.Presenters
                 return;
             }
             
-            var user = new User()
+            var user = new UserModel()
             {
                 Email = model.Email,
                 FirstName = model.FirstName,
@@ -44,7 +45,7 @@ namespace ToDoApp.Presenters
 
             if (RegisterUser(user))
             {
-                User = UserRepository.GetUser(user.Email);
+                User = UserService.GetUser(user.Email);
                 SharedPreferences.Edit().PutString("loggedUser", user.Email).Apply(); ;
 
                 _view.SendSuccess();
@@ -54,7 +55,7 @@ namespace ToDoApp.Presenters
 
         private bool CheckEmailFree(string email)
         {
-            var user = UserRepository.GetUser(email);
+            var user = UserService.GetUser(email);
             return user == null;
         }
 
@@ -63,12 +64,12 @@ namespace ToDoApp.Presenters
             return string.Equals(password, confirmPassword);
         }
 
-        private bool RegisterUser(User user)
+        private bool RegisterUser(UserModel user)
         {
-            var isCreated = UserRepository.CreateUser(user);
+            var isCreated = UserService.Register(user);
             if (!isCreated) return false;
 
-            User = UserRepository.GetUser(user.Email);
+            User = UserService.GetUser(user.Email);
             return true;
         }
     }

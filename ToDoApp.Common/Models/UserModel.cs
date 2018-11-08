@@ -1,10 +1,10 @@
-﻿using Realms;
+﻿using System.Collections.Generic;
 
 namespace ToDoApp.Common.Models
 {
-    public class User : RealmObject
+    public class UserModel
     {
-        [PrimaryKey] public int Id { get; set; }
+        public int Id { get; set; }
 
         public string Email { get; set; }
         public string Password { get; set; }
@@ -12,6 +12,6 @@ namespace ToDoApp.Common.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         
-        public RealmList<UserTaskList> UserTaskLists { get; }
+        public List<UserTaskListModel> UserTaskLists { get; set; }
     }
 }

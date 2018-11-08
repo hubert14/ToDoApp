@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	<TextView
+		android:layout_width="match_parent"
+		android:text="Give your new list a name"
+    android:layout_height="wrap_content"
+		android:textSize="20dp"
+		android:fontFamily="@font/arial"
+		android:gravity="center"
+	android:background="@color/colorAccent"/>
+    <EditText
+        android:id="@+id/create_list_name"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New list name"
+	android:padding="10dp"/>
+</LinearLayout>

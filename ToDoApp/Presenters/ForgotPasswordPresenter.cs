@@ -30,7 +30,7 @@ namespace ToDoApp.Presenters
 
         private bool FindEmailInDatabase(string email)
         {
-            var user = UserRepository.GetUser(email);
+            var user = UserService.GetUser(email);
             return user != null;
         }
     }

@@ -37,9 +37,9 @@ namespace ToDoApp.Presenters
             _view.SendSuccess();
         }
 
-        private User Login(string email, string password)
+        private UserModel Login(string email, string password)
         {
-            return UserRepository.Login(email, password);
+            return UserService.Login(email, password);
             
         }
     }

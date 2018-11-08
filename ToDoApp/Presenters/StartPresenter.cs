@@ -18,8 +18,7 @@ namespace ToDoApp.Presenters
         public void InitUser()
         {
             var email = SharedPreferences.GetString("loggedUser", string.Empty);
-            User = UserRepository.GetUser(email);
-            InitRepositories();
+            User = UserService.GetUser(email);
         }
     }
 }

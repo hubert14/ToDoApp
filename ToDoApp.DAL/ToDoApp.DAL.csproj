@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToDoApp.DAL\ToDoApp.DAL.csproj" />
+    <PackageReference Include="Realm.Database" Version="3.3.0" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Realms;
-using ToDoApp.Common.Models;
+using ToDoApp.DAL.Models;
 
-namespace ToDoApp.Common.Repositories
+namespace ToDoApp.DAL.Repositories
 {
     public class UserRepository
     {
@@ -15,6 +16,14 @@ namespace ToDoApp.Common.Repositories
 
         public bool CreateUser(User model)
         {
+            model = new User(new List<UserTaskList>())
+            {
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Password = model.Password,
+            };
+
             var realm = Realm.GetInstance(_databasePath);
 
             var id = realm.All<User>()?.LastOrDefault()?.Id ?? 0;
@@ -22,12 +31,6 @@ namespace ToDoApp.Common.Repositories
 
             realm.Write(() => { realm.Add(model); });
             return true;
-        }
-        
-        public User Login(string email, string password)
-        {
-            var realm = Realm.GetInstance(_databasePath);
-            return realm.All<User>().FirstOrDefault(x => x.Email == email && x.Password == password);
         }
 
         public User GetUser(string email)

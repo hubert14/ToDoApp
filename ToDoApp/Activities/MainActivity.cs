@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ToDoApp.Activities.Interfaces;
 using ToDoApp.Common.Models;
+using ToDoApp.Fragments;
 using ToDoApp.Presenters;
+using ToDoApp.TaskListView;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace ToDoApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
-    public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener, IMainView
+    public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener, IMainView, ICreateListDialogListener, IUserTaskDialogListener
     {
         private MainPresenter _presenter;
 
@@ -26,6 +30,9 @@ namespace ToDoApp.Activities
         private DrawerLayout _drawer;
         private Toolbar _toolbar;
         private NavigationView _navigationView;
+
+        private RecyclerView _taskListView;
+        private TaskListAdapter _taskListAdapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,20 +44,31 @@ namespace ToDoApp.Activities
         #region Initialization
         private void Initialize()
         {
-            _presenter = new MainPresenter(this);
-
+            InitTaskListView();
             InitToolbar();
-            InitNavigationHeader();
             InitFab();
             InitDrawer();
-            InitNavigationViewListener();
+            InitNavigationView();
 
-            _presenter.GetUserInfo();
+            _presenter = new MainPresenter(this);
         }
 
-        private void InitNavigationViewListener()
+        private void InitTaskListView()
+        {
+            _taskListView = FindViewById<RecyclerView>(Resource.Id.main_task_list);
+
+            var layoutManager = new LinearLayoutManager(this);
+            _taskListView.SetLayoutManager(layoutManager);
+        }
+
+        private void InitNavigationView()
         {
             _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+
+            var header = _navigationView.GetHeaderView(0);
+            _headerEmail = header.FindViewById<TextView>(Resource.Id.nav_header_email);
+            _headerName = header.FindViewById<TextView>(Resource.Id.nav_header_userName);
+
             _navigationView.SetNavigationItemSelectedListener(this);
         }
 
@@ -69,15 +87,6 @@ namespace ToDoApp.Activities
 
         }
 
-        private void InitNavigationHeader()
-        {
-            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-            var header = _navigationView.GetHeaderView(0);
-
-            _headerEmail = header.FindViewById<TextView>(Resource.Id.nav_header_email);
-            _headerName = header.FindViewById<TextView>(Resource.Id.nav_header_userName);
-        }
-
         private void InitFab()
         {
             FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
@@ -88,16 +97,52 @@ namespace ToDoApp.Activities
 
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
-            View view = (View)sender;
-            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (View.IOnClickListener)null).Show();
-            // TODO: Create task action
+            UserTaskDialogFragment dialog = new UserTaskDialogFragment();
+            dialog.Show(FragmentManager, "createTask");
         }
 
         public void ShowUserInfo(string email, string name)
         {
             _headerEmail.Text = email;
             _headerName.Text = name;
+        }
+
+        public void ShowTaskLists(List<UserTaskListModel> list)
+        {
+            _navigationView.Menu.Clear();
+
+            foreach (var taskList in list)
+            {
+                var isSuccess = taskList.UserTasks.FirstOrDefault(x => x.Checked == false) == null;
+
+                var icon = isSuccess
+                    ? Resource.Drawable.ic_check_box_green_200_24dp
+                    : Resource.Drawable.ic_check_box_outline_blank_red_400_24dp;
+
+                _navigationView.Menu.Add(taskList.Name).SetIcon(icon);
+            }
+
+            _navigationView.Menu.Add("New list").SetIcon(Resource.Drawable.ic_playlist_add_black_24dp);
+        }
+
+        public void ShowTasks(List<UserTaskModel> list)
+        {
+            _taskListAdapter = new TaskListAdapter(list);
+
+            _taskListAdapter.TouchHandler += (s, e) =>
+            {
+                var item = _taskListAdapter.TaskList[e];
+                _presenter.SendChangeCheckRequest(item); 
+            };
+
+            _taskListView.SetAdapter(_taskListAdapter);
+            _taskListAdapter.NotifyDataSetChanged();
+        }
+
+        public void StartCreateListActivity()
+        {
+            CreateTaskListFragment dialog = new CreateTaskListFragment();
+            dialog.Show(FragmentManager, "createList");
         }
 
         public override void OnBackPressed()
@@ -134,36 +179,27 @@ namespace ToDoApp.Activities
 
         public bool OnNavigationItemSelected(IMenuItem item)
         {
-            int id = item.ItemId;
-
-            if (id == Resource.Id.nav_camera)
-            {
-                // Handle the camera action
-            }
-            else if (id == Resource.Id.nav_gallery)
-            {
-
-            }
-            else if (id == Resource.Id.nav_slideshow)
-            {
-
-            }
-            else if (id == Resource.Id.nav_manage)
-            {
-
-            }
-            else if (id == Resource.Id.nav_share)
-            {
-
-            }
-            else if (id == Resource.Id.nav_send)
-            {
-
-            }
-
+            _presenter.ItemPressed(item);
             _drawer.CloseDrawer(GravityCompat.Start);
             return true;
         }
+
+        public void OnConfirmListCreate(string listName)
+        {
+            _presenter.CreateListRequest(listName);
+        }
+
+        public void OnConfirmTaskCreate(UserTaskModel taskModel)
+        {
+            _presenter.CreateTaskRequest(taskModel);
+        }
+
+        public void OnConfirmTaskEdit(UserTaskModel taskModel)
+        {
+            _presenter.EditTaskRequest(taskModel);
+        }
     }
 }
+
+
 

@@ -1,6 +1,6 @@
 ﻿using ToDoApp.Activities.Interfaces;
 
-namespace ToDoApp.Presenters
+namespace ToDoApp.Presenters.Authorize
 {
     public class ForgotPasswordPresenter : BasePresenter
     {

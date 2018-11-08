@@ -75,11 +75,11 @@
     <Compile Include="Models\Authorize\LoginRequestModel.cs" />
     <Compile Include="Models\Authorize\RegisterRequestModel.cs" />
     <Compile Include="Presenters\BasePresenter.cs" />
-    <Compile Include="Presenters\ForgotPasswordPresenter.cs" />
-    <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\Authorize\ForgotPasswordPresenter.cs" />
+    <Compile Include="Presenters\Authorize\LoginPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Activities\Authorize\RegisterActivity.cs" />
-    <Compile Include="Presenters\RegisterPresenter.cs" />
+    <Compile Include="Presenters\Authorize\RegisterPresenter.cs" />
     <Compile Include="Presenters\SettingsPresenter.cs" />
     <Compile Include="Presenters\StartPresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

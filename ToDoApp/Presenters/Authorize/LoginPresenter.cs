@@ -1,8 +1,7 @@
-﻿using ToDoApp.Activities.Authorize;
-using ToDoApp.Activities.Interfaces;
+﻿using ToDoApp.Activities.Interfaces;
 using ToDoApp.Common.Models;
 
-namespace ToDoApp.Presenters
+namespace ToDoApp.Presenters.Authorize
 {
     public class LoginPresenter : BasePresenter
     {

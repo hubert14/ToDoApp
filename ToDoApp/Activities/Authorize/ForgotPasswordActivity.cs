@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using ToDoApp.Activities.Interfaces;
-using ToDoApp.Presenters;
+using ToDoApp.Presenters.Authorize;
 
 namespace ToDoApp.Activities.Authorize
 {

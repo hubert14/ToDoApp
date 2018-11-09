@@ -8,15 +8,25 @@ namespace ToDoApp.TaskListView
 {
     public class TaskListViewHolder : RecyclerView.ViewHolder
     {
-        public ImageView Image { get; private set; }
+        public View View { get; private set; }
+
+        public CheckBox CheckBox { get; private set; }
+
         public TextView Name { get; private set; }
         public TextView Description { get; private set; }
 
+        public Button DeleteButton { get; private set; }
+
         public TaskListViewHolder(View itemView) : base(itemView)
         {
-            Image = itemView.FindViewById<ImageView>(Resource.Id.userTask_image);
+            View = itemView;
+
+            CheckBox = itemView.FindViewById<CheckBox>(Resource.Id.userTask_checkBox);
+
             Name = itemView.FindViewById<TextView>(Resource.Id.userTask_task_name);
             Description = itemView.FindViewById<TextView>(Resource.Id.userTask_task_description);
+
+            DeleteButton = itemView.FindViewById<Button>(Resource.Id.userTask_task_delete);
         }
     }
 }

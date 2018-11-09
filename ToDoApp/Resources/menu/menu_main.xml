@@ -1,6 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+  
+    <item
+        android:id="@+id/action_editList"
+        android:orderInCategory="98"
+        android:title="Edit list"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_deleteList"
+        android:orderInCategory="99"
+        android:title="Delete list"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

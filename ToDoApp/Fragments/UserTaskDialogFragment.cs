@@ -51,6 +51,9 @@ namespace ToDoApp.Fragments
                 builder.SetView(view)
                     .SetPositiveButton("Edit", (s, e) =>
                     {
+                        _taskModel.Name = nameField.Text;
+                        _taskModel.Description = descriptionField.Text;
+
                         _listener.OnConfirmTaskEdit(_taskModel);
                     })
                     .SetNegativeButton("Cancel", (s, e) => { });

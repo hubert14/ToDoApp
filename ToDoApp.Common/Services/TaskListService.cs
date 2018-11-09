@@ -35,6 +35,11 @@ namespace ToDoApp.Common.Services
         {
             return _repository.DeleteTaskList(Mapper.MapTaskList(list));
         }
+
+        public bool UpdateTaskList(UserTaskListModel list)
+        {
+            return _repository.UpdateTaskList(Mapper.MapTaskList(list));
+        }
     }
 }
 

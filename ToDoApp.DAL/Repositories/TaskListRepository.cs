@@ -36,9 +36,7 @@ namespace ToDoApp.DAL.Repositories
             taskList2.UserTasks.Add(new UserTask() { Id = 6, Name = "bgfbg", Description = "dwqnjdwqj", Checked = true });
             taskList2.UserTasks.Add(new UserTask() { Id = 7, Name = "gffdsfesfdsgs", Description = "gfsd", Checked = true });
 
-            var list = new List<UserTaskList>();
-            list.Add(taskList);
-            list.Add(taskList2);
+            var list = new List<UserTaskList> {taskList, taskList2};
         }
 
         public List<UserTaskList> GetAllTaskLists()
@@ -46,29 +44,9 @@ namespace ToDoApp.DAL.Repositories
             var realm = Realm.GetInstance(_databasePath);
 
             var user = realm.All<User>().FirstOrDefault(x => x.Id == _userId);
-            if (user == null) return null;
 
-            var taskList = user.UserTaskLists;
-
-            return taskList.ToList();
-        }
-
-        public bool AddTaskToList(UserTaskList list, UserTask task)
-        {
-            var realm = Realm.GetInstance(_databasePath);
-            var item = realm.All<UserTaskList>().FirstOrDefault(x => x.Id == list.Id);
-            if (item == null) return false;
-
-            var id = realm.All<UserTask>().LastOrDefault()?.Id ?? 0;
-            task.Id = ++id;
-
-            realm.Write(() =>
-            {
-                realm.Add(task);
-                item.UserTasks.Add(task);
-            });
-
-            return true;
+            var taskList = user?.UserTaskLists.ToList();
+            return taskList ?? new List<UserTaskList>();
         }
 
         public bool CreateTaskList(UserTaskList model)
@@ -77,6 +55,7 @@ namespace ToDoApp.DAL.Repositories
 
             var user = realm.All<User>().FirstOrDefault(x => x.Id == _userId);
             if (user == null) return false;
+            model.RefUser = user;
 
             var id = realm.All<UserTaskList>()?.LastOrDefault()?.Id ?? 0;
             model.Id = ++id;
@@ -94,9 +73,8 @@ namespace ToDoApp.DAL.Repositories
             var realm = Realm.GetInstance(_databasePath);
 
             var user = realm.All<User>().FirstOrDefault(x => x.Id == _userId);
-            return user == null 
-                ? null 
-                : realm.All<UserTaskList>().FirstOrDefault(x => x.Name == name);
+            var taskList = user?.UserTaskLists.FirstOrDefault(x => x.Name == name);
+            return taskList ?? new UserTaskList(new List<UserTask>());
         }
 
         public bool UpdateTaskList(UserTaskList model)
@@ -110,13 +88,14 @@ namespace ToDoApp.DAL.Repositories
         {
             var realm = Realm.GetInstance(_databasePath);
             var user = realm.All<User>().FirstOrDefault(x => x.Id == _userId);
-            if (user == null) return false;
+            var taskList = realm.All<UserTaskList>().FirstOrDefault(x => x.Id == model.Id);
 
-
+            if (user == null || taskList == null) return false;
+            
             realm.Write(() =>
             {
-                realm.Remove(model);
-                user.UserTaskLists.Remove(model);
+                user.UserTaskLists.Remove(taskList);
+                realm.Remove(taskList);
             });
             return true;
         }

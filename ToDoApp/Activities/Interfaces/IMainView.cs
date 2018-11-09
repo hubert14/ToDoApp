@@ -7,7 +7,12 @@ namespace ToDoApp.Activities.Interfaces
     {
         void ShowUserInfo(string email, string name);
         void ShowTaskLists(List<UserTaskListModel> list);
-        void ShowTasks(List<UserTaskModel> list);
+        void ShowTasks(UserTaskListModel list);
         void StartCreateListActivity();
+
+        void ShowDeleteListAlert();
+        void ShowEditListDialog(UserTaskListModel model);
+        void ShowEditTaskDialog(UserTaskModel model);
+        void ShowCreateTaskDialog();
     }
 }

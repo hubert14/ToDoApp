@@ -71,7 +71,7 @@
     <Compile Include="Activities\Authorize\LoginActivity.cs" />
     <Compile Include="Activities\SettingsActivity.cs" />
     <Compile Include="Fragments\UserTaskDialogFragment.cs" />
-    <Compile Include="Fragments\CreateTaskListFragment.cs" />
+    <Compile Include="Fragments\TaskListDialogFragment.cs" />
     <Compile Include="Models\Authorize\LoginRequestModel.cs" />
     <Compile Include="Models\Authorize\RegisterRequestModel.cs" />
     <Compile Include="Presenters\BasePresenter.cs" />
@@ -114,7 +114,6 @@
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values-v21\styles.xml" />
-    <AndroidResource Include="Resources\drawable\side_nav_bar.xml" />
     <AndroidResource Include="Resources\drawable-v21\ic_menu_camera.xml" />
     <AndroidResource Include="Resources\drawable-v21\ic_menu_gallery.xml" />
     <AndroidResource Include="Resources\drawable-v21\ic_menu_manage.xml" />
@@ -248,7 +247,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_playlist_add_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\dialog_createList.axml">
+    <AndroidResource Include="Resources\layout\dialog_taskList.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -256,6 +255,9 @@
     <AndroidResource Include="Resources\layout\dialog_userTask.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\side_nav_bar.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

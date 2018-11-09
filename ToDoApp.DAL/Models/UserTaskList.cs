@@ -18,5 +18,7 @@ namespace ToDoApp.DAL.Models
         public string Name { get; set; }
 
         public IList<UserTask> UserTasks { get; }
+
+        public User RefUser { get; set; }
     }
 }

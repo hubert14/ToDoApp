@@ -46,7 +46,7 @@ namespace ToDoApp.Presenters.Authorize
             if (RegisterUser(user))
             {
                 User = UserService.GetUser(user.Email);
-                SharedPreferences.Edit().PutString("loggedUser", user.Email).Apply(); ;
+                SharedPreferences.Edit().PutString("loggedUser", user.Email).Apply();
 
                 _view.SendSuccess();
             }
@@ -56,7 +56,7 @@ namespace ToDoApp.Presenters.Authorize
         private bool CheckEmailFree(string email)
         {
             var user = UserService.GetUser(email);
-            return user == null;
+            return user.Email != email;
         }
 
         private bool CheckPasswordsEquals(string password, string confirmPassword)

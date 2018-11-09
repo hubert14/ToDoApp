@@ -11,7 +11,9 @@ namespace ToDoApp.TaskListView
 
     public class TaskListAdapter : RecyclerView.Adapter
     {
-        public event CheckHandler TouchHandler;
+        public event CheckHandler CheckboxClickHandler;
+        public event CheckHandler EditHandler;
+        public event CheckHandler DeleteButtonHandler;
         
         public List<UserTaskModel> TaskList;
         public TaskListAdapter(List<UserTaskModel> taskList)
@@ -23,20 +25,9 @@ namespace ToDoApp.TaskListView
         {
             if (!(holder is TaskListViewHolder vh)) return;
 
-            var isChecked = TaskList[position].Checked;
-
-            vh.Image.SetImageResource(isChecked 
-                ? Resource.Drawable.ic_check_box_green_200_24dp 
-                : Resource.Drawable.ic_check_box_outline_blank_red_400_24dp);
-
+            vh.CheckBox.Checked = TaskList[position].Checked;
             vh.Name.Text = TaskList[position].Name;
             vh.Description.Text = TaskList[position].Description;
-
-            vh.Image.Touch += (sender, args) =>
-            {
-                if(args.Event.Action == MotionEventActions.Up)
-                    TouchHandler?.Invoke(this, position);
-            };
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -44,6 +35,17 @@ namespace ToDoApp.TaskListView
             View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.userTask_view, parent, false);
 
             TaskListViewHolder vh = new TaskListViewHolder(itemView);
+
+            vh.CheckBox.CheckedChange += (s, e) => { CheckboxClickHandler?.Invoke(this, vh.AdapterPosition); };
+
+            void OnDeleteButtonClick(object s, EventArgs e)
+            {
+                DeleteButtonHandler?.Invoke(this, vh.AdapterPosition);
+            }
+            vh.DeleteButton.Click += OnDeleteButtonClick;
+
+            vh.View.LongClick += (s,e) => { EditHandler?.Invoke(this, vh.AdapterPosition); };
+
             return vh;
         }
 

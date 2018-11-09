@@ -23,6 +23,7 @@ namespace ToDoApp.DAL.Repositories
 
             var item = realm.All<UserTaskList>().FirstOrDefault(x => x.Id == list.Id);
             if (item == null) return false;
+            task.RefList = item;
 
             var id = realm.All<UserTask>().LastOrDefault()?.Id ?? 0;
             task.Id = ++id;
@@ -42,11 +43,16 @@ namespace ToDoApp.DAL.Repositories
             var task = realm.All<UserTask>().FirstOrDefault(x => x.Id == item.Id);
             if (task == null) return false;
 
+            var refTask = task.RefList.UserTasks.FirstOrDefault(x => x.Id == item.Id);
             realm.Write(() =>
             {
                 task.Name = item.Name;
                 task.Description = item.Description;
                 task.Checked = item.Checked;
+
+                refTask.Name = item.Name;
+                refTask.Description = item.Description;
+                refTask.Checked = item.Checked;
             });
 
             return true;
@@ -70,7 +76,7 @@ namespace ToDoApp.DAL.Repositories
             var realm = Realm.GetInstance(_databasePath);
             var task = realm.All<UserTask>().FirstOrDefault(x => x.Name == name);
 
-            return task;
+            return task ?? new UserTask();
         }
     }
 }

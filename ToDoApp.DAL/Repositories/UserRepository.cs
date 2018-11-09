@@ -36,7 +36,8 @@ namespace ToDoApp.DAL.Repositories
         public User GetUser(string email)
         {
             var realm = Realm.GetInstance(_databasePath);
-            return realm.All<User>().FirstOrDefault(x => x.Email == email);
+            var user = realm.All<User>().FirstOrDefault(x => x.Email == email);
+            return user ?? new User();
         }
 
         public bool UpdateUser(User model)

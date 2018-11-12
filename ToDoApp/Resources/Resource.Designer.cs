@@ -2460,8 +2460,8 @@ namespace ToDoApp
 			// aapt resource value: 0x7f090037
 			public const int SYM = 2131296311;
 			
-			// aapt resource value: 0x7f0900c1
-			public const int action0 = 2131296449;
+			// aapt resource value: 0x7f0900c3
+			public const int action0 = 2131296451;
 			
 			// aapt resource value: 0x7f09007c
 			public const int action_bar = 2131296380;
@@ -2484,23 +2484,23 @@ namespace ToDoApp
 			// aapt resource value: 0x7f09005a
 			public const int action_bar_title = 2131296346;
 			
-			// aapt resource value: 0x7f0900be
-			public const int action_container = 2131296446;
+			// aapt resource value: 0x7f0900c0
+			public const int action_container = 2131296448;
 			
 			// aapt resource value: 0x7f09007d
 			public const int action_context_bar = 2131296381;
 			
-			// aapt resource value: 0x7f0900da
-			public const int action_deleteList = 2131296474;
+			// aapt resource value: 0x7f0900dc
+			public const int action_deleteList = 2131296476;
 			
-			// aapt resource value: 0x7f0900c5
-			public const int action_divider = 2131296453;
+			// aapt resource value: 0x7f0900c7
+			public const int action_divider = 2131296455;
 			
-			// aapt resource value: 0x7f0900d9
-			public const int action_editList = 2131296473;
+			// aapt resource value: 0x7f0900db
+			public const int action_editList = 2131296475;
 			
-			// aapt resource value: 0x7f0900bf
-			public const int action_image = 2131296447;
+			// aapt resource value: 0x7f0900c1
+			public const int action_image = 2131296449;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -2517,14 +2517,14 @@ namespace ToDoApp
 			// aapt resource value: 0x7f09005c
 			public const int action_mode_close_button = 2131296348;
 			
-			// aapt resource value: 0x7f0900db
-			public const int action_settings = 2131296475;
+			// aapt resource value: 0x7f0900dd
+			public const int action_settings = 2131296477;
 			
-			// aapt resource value: 0x7f0900c0
-			public const int action_text = 2131296448;
+			// aapt resource value: 0x7f0900c2
+			public const int action_text = 2131296450;
 			
-			// aapt resource value: 0x7f0900ce
-			public const int actions = 2131296462;
+			// aapt resource value: 0x7f0900d0
+			public const int actions = 2131296464;
 			
 			// aapt resource value: 0x7f09005d
 			public const int activity_chooser_view_content = 2131296349;
@@ -2559,8 +2559,8 @@ namespace ToDoApp
 			// aapt resource value: 0x7f090063
 			public const int buttonPanel = 2131296355;
 			
-			// aapt resource value: 0x7f0900c2
-			public const int cancel_action = 2131296450;
+			// aapt resource value: 0x7f0900c4
+			public const int cancel_action = 2131296452;
 			
 			// aapt resource value: 0x7f090045
 			public const int center = 2131296325;
@@ -2574,8 +2574,8 @@ namespace ToDoApp
 			// aapt resource value: 0x7f090073
 			public const int checkbox = 2131296371;
 			
-			// aapt resource value: 0x7f0900ca
-			public const int chronometer = 2131296458;
+			// aapt resource value: 0x7f0900cc
+			public const int chronometer = 2131296460;
 			
 			// aapt resource value: 0x7f09004e
 			public const int clip_horizontal = 2131296334;
@@ -2622,20 +2622,26 @@ namespace ToDoApp
 			// aapt resource value: 0x7f0900b2
 			public const int design_navigation_view = 2131296434;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int dialog_list_name = 2131296439;
+			// aapt resource value: 0x7f0900b8
+			public const int dialog_list_name = 2131296440;
 			
-			// aapt resource value: 0x7f0900bb
-			public const int dialog_userTask_description = 2131296443;
+			// aapt resource value: 0x7f0900b7
+			public const int dialog_list_text = 2131296439;
+			
+			// aapt resource value: 0x7f0900bd
+			public const int dialog_userTask_description = 2131296445;
+			
+			// aapt resource value: 0x7f0900bc
+			public const int dialog_userTask_description_layout = 2131296444;
 			
 			// aapt resource value: 0x7f0900ba
-			public const int dialog_userTask_description_layout = 2131296442;
+			public const int dialog_userTask_layout = 2131296442;
 			
-			// aapt resource value: 0x7f0900b8
-			public const int dialog_userTask_layout = 2131296440;
+			// aapt resource value: 0x7f0900bb
+			public const int dialog_userTask_name = 2131296443;
 			
 			// aapt resource value: 0x7f0900b9
-			public const int dialog_userTask_name = 2131296441;
+			public const int dialog_userTask_text = 2131296441;
 			
 			// aapt resource value: 0x7f090020
 			public const int disableHome = 2131296288;
@@ -2649,8 +2655,8 @@ namespace ToDoApp
 			// aapt resource value: 0x7f090030
 			public const int end = 2131296304;
 			
-			// aapt resource value: 0x7f0900d0
-			public const int end_padder = 2131296464;
+			// aapt resource value: 0x7f0900d2
+			public const int end_padder = 2131296466;
 			
 			// aapt resource value: 0x7f09003f
 			public const int enterAlways = 2131296319;
@@ -2709,8 +2715,8 @@ namespace ToDoApp
 			// aapt resource value: 0x7f090062
 			public const int icon = 2131296354;
 			
-			// aapt resource value: 0x7f0900cf
-			public const int icon_group = 2131296463;
+			// aapt resource value: 0x7f0900d1
+			public const int icon_group = 2131296465;
 			
 			// aapt resource value: 0x7f09003a
 			public const int ifRoom = 2131296314;
@@ -2718,8 +2724,8 @@ namespace ToDoApp
 			// aapt resource value: 0x7f09005f
 			public const int image = 2131296351;
 			
-			// aapt resource value: 0x7f0900cb
-			public const int info = 2131296459;
+			// aapt resource value: 0x7f0900cd
+			public const int info = 2131296461;
 			
 			// aapt resource value: 0x7f090059
 			public const int italic = 2131296345;
@@ -2772,14 +2778,14 @@ namespace ToDoApp
 			// aapt resource value: 0x7f0900a8
 			public const int main_task_list = 2131296424;
 			
-			// aapt resource value: 0x7f0900d8
-			public const int masked = 2131296472;
+			// aapt resource value: 0x7f0900da
+			public const int masked = 2131296474;
 			
-			// aapt resource value: 0x7f0900c4
-			public const int media_actions = 2131296452;
+			// aapt resource value: 0x7f0900c6
+			public const int media_actions = 2131296454;
 			
-			// aapt resource value: 0x7f0900d1
-			public const int message = 2131296465;
+			// aapt resource value: 0x7f0900d3
+			public const int message = 2131296467;
 			
 			// aapt resource value: 0x7f090031
 			public const int middle = 2131296305;
@@ -2790,11 +2796,11 @@ namespace ToDoApp
 			// aapt resource value: 0x7f090028
 			public const int multiply = 2131296296;
 			
-			// aapt resource value: 0x7f0900bd
-			public const int nav_header_email = 2131296445;
+			// aapt resource value: 0x7f0900bf
+			public const int nav_header_email = 2131296447;
 			
-			// aapt resource value: 0x7f0900bc
-			public const int nav_header_userName = 2131296444;
+			// aapt resource value: 0x7f0900be
+			public const int nav_header_userName = 2131296446;
 			
 			// aapt resource value: 0x7f090098
 			public const int nav_view = 2131296408;
@@ -2811,14 +2817,14 @@ namespace ToDoApp
 			// aapt resource value: 0x7f09001e
 			public const int normal = 2131296286;
 			
-			// aapt resource value: 0x7f0900cd
-			public const int notification_background = 2131296461;
+			// aapt resource value: 0x7f0900cf
+			public const int notification_background = 2131296463;
 			
-			// aapt resource value: 0x7f0900c7
-			public const int notification_main_column = 2131296455;
+			// aapt resource value: 0x7f0900c9
+			public const int notification_main_column = 2131296457;
 			
-			// aapt resource value: 0x7f0900c6
-			public const int notification_main_column_container = 2131296454;
+			// aapt resource value: 0x7f0900c8
+			public const int notification_main_column_container = 2131296456;
 			
 			// aapt resource value: 0x7f09004c
 			public const int parallax = 2131296332;
@@ -2883,11 +2889,11 @@ namespace ToDoApp
 			// aapt resource value: 0x7f09004a
 			public const int right = 2131296330;
 			
-			// aapt resource value: 0x7f0900cc
-			public const int right_icon = 2131296460;
+			// aapt resource value: 0x7f0900ce
+			public const int right_icon = 2131296462;
 			
-			// aapt resource value: 0x7f0900c8
-			public const int right_side = 2131296456;
+			// aapt resource value: 0x7f0900ca
+			public const int right_side = 2131296458;
 			
 			// aapt resource value: 0x7f09000c
 			public const int save_image_matrix = 2131296268;
@@ -2991,8 +2997,8 @@ namespace ToDoApp
 			// aapt resource value: 0x7f09004b
 			public const int start = 2131296331;
 			
-			// aapt resource value: 0x7f0900c3
-			public const int status_bar_latest_event_content = 2131296451;
+			// aapt resource value: 0x7f0900c5
+			public const int status_bar_latest_event_content = 2131296453;
 			
 			// aapt resource value: 0x7f090076
 			public const int submenuarrow = 2131296374;
@@ -3027,8 +3033,8 @@ namespace ToDoApp
 			// aapt resource value: 0x7f090015
 			public const int textinput_error = 2131296277;
 			
-			// aapt resource value: 0x7f0900c9
-			public const int time = 2131296457;
+			// aapt resource value: 0x7f0900cb
+			public const int time = 2131296459;
 			
 			// aapt resource value: 0x7f09001c
 			public const int title = 2131296284;
@@ -3075,26 +3081,26 @@ namespace ToDoApp
 			// aapt resource value: 0x7f090026
 			public const int useLogo = 2131296294;
 			
-			// aapt resource value: 0x7f0900d2
-			public const int userTask_checkBox = 2131296466;
+			// aapt resource value: 0x7f0900d4
+			public const int userTask_checkBox = 2131296468;
+			
+			// aapt resource value: 0x7f0900d8
+			public const int userTask_task_delete = 2131296472;
+			
+			// aapt resource value: 0x7f0900d7
+			public const int userTask_task_description = 2131296471;
 			
 			// aapt resource value: 0x7f0900d6
-			public const int userTask_task_delete = 2131296470;
+			public const int userTask_task_name = 2131296470;
 			
 			// aapt resource value: 0x7f0900d5
-			public const int userTask_task_description = 2131296469;
-			
-			// aapt resource value: 0x7f0900d4
-			public const int userTask_task_name = 2131296468;
-			
-			// aapt resource value: 0x7f0900d3
-			public const int userTask_text_layout = 2131296467;
+			public const int userTask_text_layout = 2131296469;
 			
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f0900d7
-			public const int visible = 2131296471;
+			// aapt resource value: 0x7f0900d9
+			public const int visible = 2131296473;
 			
 			// aapt resource value: 0x7f09003c
 			public const int withText = 2131296316;

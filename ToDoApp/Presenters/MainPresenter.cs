@@ -11,7 +11,7 @@ namespace ToDoApp.Presenters
 {
     public class MainPresenter : BasePresenter
     {
-        private IMainView _view;
+        private readonly IMainView _view;
 
         private List<UserTaskListModel> _lists;
         private UserTaskListModel _currentList;
@@ -23,7 +23,7 @@ namespace ToDoApp.Presenters
 
             _view.ShowUserInfo(User.Email, User.FirstName + " " + User.LastName);
 
-            if (_lists.Count > 1)
+            if (_lists.Count > 0)
                 _currentList = _lists[0];
 
             UpdateView();
@@ -33,7 +33,7 @@ namespace ToDoApp.Presenters
         {
             if (item.TitleFormatted.ToString() == "New list")
             {
-                _view.StartCreateListActivity();
+                _view.ShowCreateListDialog();
                 return;
             }
 
@@ -43,7 +43,7 @@ namespace ToDoApp.Presenters
             Update();
         }
 
-        public void CreateListRequest(string listName)
+        public void CreateList(string listName)
         {
             var newList = new UserTaskListModel() {Name = listName};
             TaskListService.CreateTaskList(newList);
@@ -51,26 +51,26 @@ namespace ToDoApp.Presenters
             Update();
         }
 
-        public void EditTaskRequest(UserTaskModel taskModel)
+        public void EditTask(UserTaskModel taskModel)
         {
             TaskService.UpdateTask(taskModel);
             Update();
         }
 
-        public void CreateTaskRequest(UserTaskModel taskModel)
+        public void CreateTask(UserTaskModel taskModel)
         {
             TaskService.CreateTask(_currentList, taskModel);
             Update();
         }
 
-        public void SendChangeCheckRequest(UserTaskModel item)
+        public void ChangeTaskCompleted(UserTaskModel item)
         {
             item.Checked = !item.Checked;
             TaskService.UpdateTask(item);
             _view.ShowTaskLists(_lists);
         }
 
-        public void DeleteTaskRequest(UserTaskModel item)
+        public void DeleteTask(UserTaskModel item)
         {
             TaskService.DeleteTask(item);
             Update();
@@ -92,30 +92,61 @@ namespace ToDoApp.Presenters
         private void UpdateView()
         {
             _view.ShowTaskLists(_lists);
-
-            if (_currentList == null) return;
             _view.ShowTasks(_currentList);
         }
 
-        public void DeleteListRequest()
+        /// <summary>
+        /// Delete current list
+        /// </summary>
+        public void DeleteList()
         {
-            _view.
             TaskListService.DeleteTaskList(_currentList);
             _currentList = _lists[0] ?? new UserTaskListModel();
 
             Update();
         }
 
-        public void EditTaskListRequest(UserTaskListModel taskList)
+        /// <summary>
+        /// Update task list and set current list to that
+        /// </summary>
+        /// <param name="taskList"></param>
+        public void EditTaskList(UserTaskListModel taskList)
         {
             TaskListService.UpdateTaskList(taskList);
             _currentList = taskList;
             Update();
         }
 
-        public void SendEditListRequest()
+        /// <summary>
+        /// Calls edit dialog with current list
+        /// </summary>
+        public void EditListRequest()
         {
-            _view.
+            _view.ShowEditListDialog(_currentList);
+        }
+
+        /// <summary>
+        /// Calls alert "Are you sure" for deleting current list
+        /// </summary>
+        public void DeleteListRequest()
+        {
+            _view.ShowDeleteListAlert();
+        }
+
+        /// <summary>
+        /// Calls edit dialog with task
+        /// </summary>
+        public void EditTaskRequest(UserTaskModel task)
+        {
+            _view.ShowEditTaskDialog(task);
+        }
+
+        /// <summary>
+        /// Calls dialog for create new task
+        /// </summary>
+        public void CreateTaskRequest()
+        {
+            _view.ShowCreateTaskDialog();
         }
     }
 }

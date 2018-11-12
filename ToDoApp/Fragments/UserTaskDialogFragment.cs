@@ -42,11 +42,13 @@ namespace ToDoApp.Fragments
 
             var nameField = view.FindViewById<EditText>(Resource.Id.dialog_userTask_name);
             var descriptionField = view.FindViewById<EditText>(Resource.Id.dialog_userTask_description);
+            var headerTextView = view.FindViewById<TextView>(Resource.Id.dialog_userTask_text);
 
             if (_taskModel != null)
             {
                 nameField.Text = _taskModel.Name;
                 descriptionField.Text = _taskModel.Description;
+                headerTextView.Text = "EDIT TASK";
 
                 builder.SetView(view)
                     .SetPositiveButton("Edit", (s, e) =>
@@ -60,6 +62,8 @@ namespace ToDoApp.Fragments
             }
             else
             {
+                headerTextView.Text = "CREATE NEW TASK";
+
                 builder.SetView(view)
                     .SetPositiveButton("Create", (s, e) =>
                     {

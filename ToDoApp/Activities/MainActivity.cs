@@ -22,7 +22,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace ToDoApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false, ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
-    public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener, IMainView, ICreateListDialogListener, IUserTaskDialogListener
+    public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener, IMainView, ITaskListDialogListener, IUserTaskDialogListener
     {
         private MainPresenter _presenter;
 
@@ -35,6 +35,7 @@ namespace ToDoApp.Activities
 
         private RecyclerView _taskListView;
         private TaskListAdapter _taskListAdapter;
+        private FloatingActionButton _createTaskFAB;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -91,16 +92,15 @@ namespace ToDoApp.Activities
 
         private void InitFab()
         {
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
+            _createTaskFAB = FindViewById<FloatingActionButton>(Resource.Id.fab);
+            _createTaskFAB.Click += FabOnClick;
         }
 
         #endregion
 
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
-            UserTaskDialogFragment dialog = new UserTaskDialogFragment();
-            dialog.Show(FragmentManager, "createTask");
+            _presenter.CreateTaskRequest();
         }
 
         public void ShowUserInfo(string email, string name)
@@ -115,9 +115,7 @@ namespace ToDoApp.Activities
 
             foreach (var taskList in list)
             {
-                var isSuccess = taskList.UserTasks.FirstOrDefault(x => x.Checked == false) == null;
-
-                var icon = isSuccess
+                var icon = taskList.IsCompleted
                     ? Resource.Drawable.ic_check_box_green_200_24dp
                     : Resource.Drawable.ic_check_box_outline_blank_red_400_24dp;
 
@@ -129,67 +127,71 @@ namespace ToDoApp.Activities
 
         public void ShowTasks(UserTaskListModel list)
         {
+            if (list == null)
+            {
+                _createTaskFAB.Visibility = ViewStates.Gone;
+                return;
+            }
+            _createTaskFAB.Visibility = ViewStates.Visible;
+            
             Title = list.Name;
-            if (_taskListAdapter == null)
+
+            if (_taskListAdapter != null)
+            {
+                _taskListAdapter.TaskList = list.UserTasks;
+                _taskListAdapter.NotifyDataSetChanged();
+            }
+            else
             {
                 _taskListAdapter = new TaskListAdapter(list.UserTasks);
 
                 _taskListAdapter.CheckboxClickHandler += (s, e) =>
                 {
                     var item = _taskListAdapter.TaskList[e];
-                    _presenter.SendChangeCheckRequest(item);
+                    _presenter.ChangeTaskCompleted(item);
                 };
                 _taskListAdapter.EditHandler += (s, e) =>
                 {
                     var item = _taskListAdapter.TaskList[e];
-                    var dialog = new UserTaskDialogFragment(item);
-                    dialog.Show(FragmentManager, "editTask");
+                    _presenter.EditTaskRequest(item);
                 };
-                _taskListAdapter.DeleteButtonHandler  += (s, e) =>
+                _taskListAdapter.DeleteButtonHandler += (s, e) =>
                 {
                     var item = _taskListAdapter.TaskList[e];
-                    _presenter.DeleteTaskRequest(item);
+                    _presenter.DeleteTask(item);
                 };
                 _taskListView.SetAdapter(_taskListAdapter);
             }
-            else
-            {
-                _taskListAdapter.TaskList = list.UserTasks;
-                _taskListAdapter.NotifyDataSetChanged();
-            }
-        }
-
-        public void StartCreateListActivity()
-        {
-            var dialog = new TaskListDialogFragment();
-            dialog.Show(FragmentManager, "createList");
         }
 
         public void ShowDeleteListAlert()
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.SetMessage("Are you sure?");
-            builder.SetPositiveButton("Yes", (sender, args) => { _presenter.DeleteListRequest(); });
+            builder.SetPositiveButton("Yes", (sender, args) => { _presenter.DeleteList(); });
             builder.SetNegativeButton("No", (sender, args) => { });
             builder.Create().Show();
         }
 
-        public void ShowEditListDialog(UserTaskListModel model)
-        {
-            
-        }
-
         public void ShowEditTaskDialog(UserTaskModel model)
         {
-            throw new NotImplementedException();
+            var dialog = new UserTaskDialogFragment(model);
+            dialog.Show(FragmentManager, "editTask");
         }
 
         public void ShowCreateTaskDialog()
         {
-            throw new NotImplementedException();
+            var dialog = new UserTaskDialogFragment();
+            dialog.Show(FragmentManager, "createTask");
         }
 
-        public void StartEditListDialog(UserTaskListModel model = null)
+        public void ShowCreateListDialog()
+        {
+            var dialog = new TaskListDialogFragment();
+            dialog.Show(FragmentManager, "createList");
+        }
+
+        public void ShowEditListDialog(UserTaskListModel model)
         {
             var dialog = new TaskListDialogFragment(model);
             dialog.Show(FragmentManager, "editList");
@@ -198,14 +200,11 @@ namespace ToDoApp.Activities
         public override void OnBackPressed()
         {
             DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            if(drawer.IsDrawerOpen(GravityCompat.Start))
-            {
+
+            if (drawer.IsDrawerOpen(GravityCompat.Start))
                 drawer.CloseDrawer(GravityCompat.Start);
-            }
             else
-            {
                 base.OnBackPressed();
-            }
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -226,7 +225,7 @@ namespace ToDoApp.Activities
 
             if (id == Resource.Id.action_editList)
             {
-                _presenter.SendEditListRequest();
+                _presenter.EditListRequest();
                 return true;
             }
 
@@ -248,25 +247,22 @@ namespace ToDoApp.Activities
 
         public void OnConfirmListCreate(string listName)
         {
-            _presenter.CreateListRequest(listName);
+            _presenter.CreateList(listName);
         }
 
         public void OnConfirmListEdit(UserTaskListModel taskList)
         {
-            _presenter.EditTaskListRequest(taskList);
+            _presenter.EditTaskList(taskList);
         }
 
         public void OnConfirmTaskCreate(UserTaskModel taskModel)
         {
-            _presenter.CreateTaskRequest(taskModel);
+            _presenter.CreateTask(taskModel);
         }
 
         public void OnConfirmTaskEdit(UserTaskModel taskModel)
         {
-            _presenter.EditTaskRequest(taskModel);
+            _presenter.EditTask(taskModel);
         }
     }
 }
-
-
-

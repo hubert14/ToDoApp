@@ -5,18 +5,20 @@
     android:layout_height="match_parent">
 	<TextView
 		android:layout_width="match_parent"
-		android:text=""
+		android:id="@+id/dialog_list_text"
 		android:padding="16dp"
-    android:layout_height="wrap_content"
+		android:text="Task list"
+		android:layout_height="wrap_content"
 		android:textSize="20dp"
 		android:fontFamily="@font/arial"
 		android:gravity="center"
-	android:background="@color/colorAccent"/>
+		android:background="@color/colorAccent"
+		android:textColor="#ffffffff" />
     <EditText
         android:id="@+id/dialog_list_name"
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="List name"
-	android:padding="10dp"/>
+	android:padding="20dp"/>
 </LinearLayout>

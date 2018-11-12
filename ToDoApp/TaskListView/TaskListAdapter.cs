@@ -16,6 +16,7 @@ namespace ToDoApp.TaskListView
         public event CheckHandler DeleteButtonHandler;
         
         public List<UserTaskModel> TaskList;
+
         public TaskListAdapter(List<UserTaskModel> taskList)
         {
             TaskList = taskList;

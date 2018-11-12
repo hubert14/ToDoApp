@@ -14,7 +14,7 @@ using ToDoApp.Common.Models;
 
 namespace ToDoApp.Fragments
 {
-    public interface ICreateListDialogListener
+    public interface ITaskListDialogListener
     {
         void OnConfirmListCreate(string listName);
         void OnConfirmListEdit(UserTaskListModel taskList);
@@ -22,7 +22,7 @@ namespace ToDoApp.Fragments
 
     public class TaskListDialogFragment : DialogFragment
     {
-        private ICreateListDialogListener _listener;
+        private ITaskListDialogListener _listener;
         private UserTaskListModel _taskList;
 
         public TaskListDialogFragment(UserTaskListModel model)
@@ -32,7 +32,6 @@ namespace ToDoApp.Fragments
 
         public TaskListDialogFragment()
         {
-            _taskList = new UserTaskListModel();
         }
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
@@ -40,9 +39,10 @@ namespace ToDoApp.Fragments
             AlertDialog.Builder builder = new AlertDialog.Builder(Activity);
             LayoutInflater inflater = Activity.LayoutInflater;
             var view = inflater.Inflate(Resource.Layout.dialog_taskList, null);
-
+            var headerTextView = view.FindViewById<TextView>(Resource.Id.dialog_list_text);
             if (_taskList == null)
             {
+                headerTextView.Text = "CREATE NEW TASK LIST";
                 builder.SetView(view)
                     .SetPositiveButton("Create", (s, e) =>
                     {
@@ -53,10 +53,13 @@ namespace ToDoApp.Fragments
             }
             else
             {
+                var nameField = view.FindViewById<EditText>(Resource.Id.dialog_list_name);
+                nameField.Text = _taskList.Name;
+                headerTextView.Text = "EDIT TASK LIST";
+
                 builder.SetView(view)
                     .SetPositiveButton("Edit", (s, e) =>
                     {
-                        var nameField = view.FindViewById<EditText>(Resource.Id.dialog_list_name);
                         _taskList.Name = nameField.Text;
                         _listener.OnConfirmListEdit(_taskList);
                     })
@@ -71,7 +74,7 @@ namespace ToDoApp.Fragments
             base.OnAttach(context);
             try
             {
-                _listener = (ICreateListDialogListener) context;
+                _listener = (ITaskListDialogListener) context;
             }
             catch (InvalidCastException e)
             {

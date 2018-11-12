@@ -10,8 +10,7 @@ namespace ToDoApp.DAL.Repositories
     public class TaskRepository
     {
         private readonly string _databasePath;
-
-
+        
         public TaskRepository(string databaseName = "database")
         {
             _databasePath = databaseName;

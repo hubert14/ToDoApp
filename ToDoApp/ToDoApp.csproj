@@ -72,8 +72,6 @@
     <Compile Include="Activities\SettingsActivity.cs" />
     <Compile Include="Fragments\UserTaskDialogFragment.cs" />
     <Compile Include="Fragments\TaskListDialogFragment.cs" />
-    <Compile Include="Models\Authorize\LoginRequestModel.cs" />
-    <Compile Include="Models\Authorize\RegisterRequestModel.cs" />
     <Compile Include="Presenters\BasePresenter.cs" />
     <Compile Include="Presenters\Authorize\ForgotPasswordPresenter.cs" />
     <Compile Include="Presenters\Authorize\LoginPresenter.cs" />

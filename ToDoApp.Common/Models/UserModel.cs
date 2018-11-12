@@ -12,6 +12,8 @@ namespace ToDoApp.Common.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         
+        public bool PushNotifications { get; set; }
+
         public List<UserTaskListModel> UserTaskLists { get; set; }
     }
 }

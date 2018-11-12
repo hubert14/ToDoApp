@@ -46,7 +46,7 @@ namespace ToDoApp.Presenters.Authorize
             if (RegisterUser(user))
             {
                 User = UserService.GetUser(user.Email);
-                SharedPreferences.Edit().PutString("loggedUser", user.Email).Apply();
+                SaveLoggedUser(User.Email);
 
                 _view.SendSuccess();
             }

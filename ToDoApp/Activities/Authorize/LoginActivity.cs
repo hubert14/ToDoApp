@@ -38,7 +38,14 @@ namespace ToDoApp.Activities.Authorize
         private void InitFields()
         {
             _email = FindViewById<EditText>(Resource.Id.login_email);
+
             _password = FindViewById<EditText>(Resource.Id.login_password);
+            _password.EditorAction += (s,e) => {
+                if (e.ActionId == ImeAction.Done)
+                {
+                    Login(this, EventArgs.Empty);
+                }
+            };
         }
 
         private void InitButtons()

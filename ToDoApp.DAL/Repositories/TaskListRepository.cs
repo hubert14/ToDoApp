@@ -89,7 +89,6 @@ namespace ToDoApp.DAL.Repositories
             var realm = Realm.GetInstance(_databasePath);
             var user = realm.All<User>().FirstOrDefault(x => x.Id == _userId);
             var taskList = realm.All<UserTaskList>().FirstOrDefault(x => x.Id == model.Id);
-
             if (user == null || taskList == null) return false;
             
             realm.Write(() =>

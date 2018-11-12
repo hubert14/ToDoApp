@@ -50,7 +50,12 @@ namespace ToDoApp.DAL.Repositories
         public bool DeleteUser(User model)
         {
             var realm = Realm.GetInstance(_databasePath);
-            realm.Write(() => { realm.Remove(model); });
+            var user = realm.All<User>().First(x => x.Id == model.Id);
+            
+            realm.Write(() =>
+            {
+                realm.Remove(user);
+            });
             return true;
         }
     }

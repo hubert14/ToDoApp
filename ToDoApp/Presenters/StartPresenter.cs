@@ -12,12 +12,12 @@ namespace ToDoApp.Presenters
 
         public bool CheckLoggedUser()
         {
-            return SharedPreferences.Contains("loggedUser");
+            return !string.IsNullOrEmpty(GetLoggedUser());
         }
 
         public void InitUser()
         {
-            var email = SharedPreferences.GetString("loggedUser", string.Empty);
+            var email = GetLoggedUser();
             User = UserService.GetUser(email);
         }
     }

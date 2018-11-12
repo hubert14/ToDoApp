@@ -31,7 +31,7 @@ namespace ToDoApp.Presenters.Authorize
 
             User = user;
             var email = user.Email;
-            SharedPreferences.Edit().PutString("loggedUser", email).Apply();
+            SaveLoggedUser(email);
 
             _view.SendSuccess();
         }

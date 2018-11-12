@@ -42,16 +42,11 @@ namespace ToDoApp.DAL.Repositories
             var task = realm.All<UserTask>().FirstOrDefault(x => x.Id == item.Id);
             if (task == null) return false;
 
-            var refTask = task.RefList.UserTasks.FirstOrDefault(x => x.Id == item.Id);
             realm.Write(() =>
             {
                 task.Name = item.Name;
                 task.Description = item.Description;
                 task.Checked = item.Checked;
-
-                refTask.Name = item.Name;
-                refTask.Description = item.Description;
-                refTask.Checked = item.Checked;
             });
 
             return true;

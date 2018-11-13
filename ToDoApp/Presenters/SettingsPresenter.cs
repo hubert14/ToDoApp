@@ -1,5 +1,4 @@
-﻿using Android.App;
-using ToDoApp.Activities.Interfaces;
+﻿using ToDoApp.Activities.Interfaces;
 
 namespace ToDoApp.Presenters
 {
@@ -24,7 +23,6 @@ namespace ToDoApp.Presenters
 
             User.FirstName = user.FirstName;
             User.LastName = user.LastName;
-            User.PushNotifications = user.PushNotifications;
 
             UserService.UpdateUser(User);
 

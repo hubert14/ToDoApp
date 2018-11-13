@@ -16,12 +16,15 @@ namespace ToDoApp.Activities
     public class SettingsActivity : AppCompatActivity, ISettingsView
     {
         private SettingsPresenter _presenter;
+
+        private TextView _headerEmail;
+        private TextView _headerName;
+        
         private EditText _firstName;
         private EditText _lastName;
         private Button _confirmButton;
-        private CheckBox _notificationsCheck;
         private Button _deleteButton;
-
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -40,7 +43,6 @@ namespace ToDoApp.Activities
         {
             _firstName = FindViewById<EditText>(Resource.Id.settings_firstName);
             _lastName = FindViewById<EditText>(Resource.Id.settings_lastName);
-            _notificationsCheck = FindViewById<CheckBox>(Resource.Id.settings_notifications_checkbox);
         }
 
         private void InitButtons()
@@ -65,7 +67,6 @@ namespace ToDoApp.Activities
         {
             _firstName.Text = user.FirstName;
             _lastName.Text = user.LastName;
-            _notificationsCheck.Checked = user.PushNotifications;
         }
 
         public UserModel GetUserInfo()
@@ -74,7 +75,6 @@ namespace ToDoApp.Activities
             {
                 FirstName =  _firstName.Text,
                 LastName = _lastName.Text,
-                PushNotifications = _notificationsCheck.Checked
             };
             return user;
         }

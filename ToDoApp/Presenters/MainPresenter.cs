@@ -85,7 +85,6 @@ namespace ToDoApp.Presenters
         private void UpdateData()
         {
             _lists = TaskListService.GetAllTaskLists();
-
             _currentList = TaskListService.GetTaskList(_currentList.Name);
         }
 
@@ -93,6 +92,7 @@ namespace ToDoApp.Presenters
         {
             _view.ShowTaskLists(_lists);
             _view.ShowTasks(_currentList);
+            _view.ShowUserInfo(User.Email, User.FirstName + " " + User.LastName);
         }
 
         /// <summary>
@@ -147,6 +147,14 @@ namespace ToDoApp.Presenters
         public void CreateTaskRequest()
         {
             _view.ShowCreateTaskDialog();
+        }
+
+        /// <summary>
+        /// Updates information and calls views methods to display info
+        /// </summary>
+        public void UpdateViewRequest()
+        {
+            Update();
         }
     }
 }

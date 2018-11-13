@@ -19,8 +19,7 @@ namespace ToDoApp.Common.Utils
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Password = model.Password,
-                PushNotifications = model.PushNotifications
+                Password = model.Password
             };
         }
 
@@ -35,7 +34,6 @@ namespace ToDoApp.Common.Utils
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Password = model.Password,
-                PushNotifications = model.PushNotifications,
                 UserTaskLists = MapTaskLists(model.UserTaskLists)
             };
         }

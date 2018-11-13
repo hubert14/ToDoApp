@@ -264,5 +264,11 @@ namespace ToDoApp.Activities
         {
             _presenter.EditTask(taskModel);
         }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            _presenter.UpdateViewRequest();
+        }
     }
 }

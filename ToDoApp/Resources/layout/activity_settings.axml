@@ -35,12 +35,6 @@
 				android:hint="Last name" />
 		</android.support.design.widget.TextInputLayout>
 
-		<CheckBox
-			android:text="Notifications for not completed tasks every day"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_margin="8dp"
-			android:id="@+id/settings_notifications_checkbox" />
 		<Button
 			android:text="Confirm"
 			android:layout_width="match_parent"

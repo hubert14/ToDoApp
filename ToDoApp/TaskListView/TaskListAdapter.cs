@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Android.Content;
+using Android.Graphics;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -45,7 +48,66 @@ namespace ToDoApp.TaskListView
             }
             vh.DeleteButton.Click += OnDeleteButtonClick;
 
-            vh.View.LongClick += (s,e) => { EditHandler?.Invoke(this, vh.AdapterPosition); };
+            vh.ItemView.LongClick += (s, e) =>
+            {
+                var item = new ClipData.Item(vh.Name.Text);
+                var data = new ClipData(vh.Name.Text, new[] {ClipDescription.MimetypeTextPlain}, item);
+                
+                vh.ItemView.StartDragAndDrop(data, new View.DragShadowBuilder(vh.ItemView), vh, 0);
+                //EditHandler?.Invoke(this, vh.AdapterPosition);
+            };
+            vh.ItemView.Drag += (sender, args) =>
+            {
+                var task = args.Event.LocalState as TaskListViewHolder;
+                
+                switch (args.Event.Action)
+                {
+                    case DragAction.Started:
+                    {
+                        vh.ItemView.SetBackgroundColor(Color.Blue);
+                        vh.ItemView.Invalidate();
+                        break;
+
+                    }
+                    case DragAction.Entered:
+                    {
+                        vh.ItemView.SetBackgroundColor(Color.Green);
+                        vh.ItemView.Invalidate();
+                        break;
+
+                    }
+                    case DragAction.Exited:
+                    {
+                        vh.ItemView.SetBackgroundColor(Color.Blue);
+                        vh.ItemView.Invalidate();
+                        break;
+
+                    }
+                    case DragAction.Location:
+                        break;
+
+                    case DragAction.Drop:
+                    {
+                        var position1 = task.AdapterPosition;
+                        var position2 = vh.AdapterPosition;
+                        var task1 = TaskList[position1];
+                        var task2 = TaskList[position2];
+                        TaskList[position2] = task1;
+                        TaskList[position1] = task2;
+                        NotifyDataSetChanged();
+                        
+                        vh.ItemView.SetBackgroundColor(Color.Transparent);
+                        vh.ItemView.Invalidate();
+                        break;
+                    }
+                    case DragAction.Ended:
+                    {
+                        vh.ItemView.SetBackgroundColor(Color.Transparent);
+                        vh.ItemView.Invalidate();
+                        break;
+                    }
+                }
+            };
 
             return vh;
         }

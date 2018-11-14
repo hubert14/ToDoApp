@@ -85,13 +85,18 @@ namespace ToDoApp.Presenters
         private void UpdateData()
         {
             _lists = TaskListService.GetAllTaskLists();
-            _currentList = TaskListService.GetTaskList(_currentList.Name);
+
+            if(_currentList != null)
+                _currentList = TaskListService.GetTaskList(_currentList.Name);
         }
 
         private void UpdateView()
         {
             _view.ShowTaskLists(_lists);
-            _view.ShowTasks(_currentList);
+            if (_currentList != null)
+            {
+                _view.ShowTasks(_currentList);
+            }
             _view.ShowUserInfo(User.Email, User.FirstName + " " + User.LastName);
         }
 

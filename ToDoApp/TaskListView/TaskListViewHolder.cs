@@ -8,8 +8,6 @@ namespace ToDoApp.TaskListView
 {
     public class TaskListViewHolder : RecyclerView.ViewHolder
     {
-        public View View { get; private set; }
-
         public CheckBox CheckBox { get; private set; }
 
         public TextView Name { get; private set; }
@@ -19,8 +17,6 @@ namespace ToDoApp.TaskListView
 
         public TaskListViewHolder(View itemView) : base(itemView)
         {
-            View = itemView;
-
             CheckBox = itemView.FindViewById<CheckBox>(Resource.Id.userTask_checkBox);
 
             Name = itemView.FindViewById<TextView>(Resource.Id.userTask_task_name);

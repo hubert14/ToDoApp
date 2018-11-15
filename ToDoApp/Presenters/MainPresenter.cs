@@ -25,8 +25,6 @@ namespace ToDoApp.Presenters
 
             if (_lists.Count > 0)
                 _currentList = _lists[0];
-
-            UpdateView();
         }
 
         public void ItemPressed(IMenuItem item)
@@ -67,6 +65,8 @@ namespace ToDoApp.Presenters
         {
             item.Checked = !item.Checked;
             TaskService.UpdateTask(item);
+
+            UpdateData();
             _view.ShowTaskLists(_lists);
         }
 

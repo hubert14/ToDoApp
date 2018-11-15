@@ -13,6 +13,7 @@ namespace ToDoApp.TaskListView
         public TextView Name { get; private set; }
         public TextView Description { get; private set; }
 
+        public Button EditButton { get; private set; }
         public Button DeleteButton { get; private set; }
 
         public TaskListViewHolder(View itemView) : base(itemView)
@@ -22,6 +23,7 @@ namespace ToDoApp.TaskListView
             Name = itemView.FindViewById<TextView>(Resource.Id.userTask_task_name);
             Description = itemView.FindViewById<TextView>(Resource.Id.userTask_task_description);
 
+            EditButton = itemView.FindViewById<Button>(Resource.Id.userTask_task_edit);
             DeleteButton = itemView.FindViewById<Button>(Resource.Id.userTask_task_delete);
         }
     }

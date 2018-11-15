@@ -1,0 +1,15 @@
+﻿<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools">
+
+  <item
+    android:id="@+id/userTask_task_edit"
+    android:orderInCategory="98"
+    android:title="Edit task"
+    app:showAsAction="never" />
+  <item
+    android:id="@+id/userTask_task_delete"
+    android:orderInCategory="99"
+    android:title="Delete task"
+    app:showAsAction="never" />
+</menu>

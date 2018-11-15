@@ -143,24 +143,27 @@ namespace ToDoApp.Activities
             }
             else
             {
-                _taskListAdapter = new TaskListAdapter(list.UserTasks);
+                _taskListAdapter = new TaskListAdapter(_taskListView, this, list.UserTasks);
+                _taskListView.SetAdapter(_taskListAdapter);
 
                 _taskListAdapter.CheckboxClickHandler += (s, e) =>
                 {
+                    if (e < 0) return;
                     var item = _taskListAdapter.TaskList[e];
                     _presenter.ChangeTaskCompleted(item);
                 };
                 _taskListAdapter.EditHandler += (s, e) =>
                 {
+                    if (e < 0) return;
                     var item = _taskListAdapter.TaskList[e];
                     _presenter.EditTaskRequest(item);
                 };
-                _taskListAdapter.DeleteButtonHandler += (s, e) =>
+                _taskListAdapter.DeleteHandler += (s, e) =>
                 {
+                    if (e < 0) return;
                     var item = _taskListAdapter.TaskList[e];
                     _presenter.DeleteTask(item);
                 };
-                _taskListView.SetAdapter(_taskListAdapter);
             }
         }
 

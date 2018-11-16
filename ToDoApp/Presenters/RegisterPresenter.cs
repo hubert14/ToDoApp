@@ -23,13 +23,13 @@ namespace ToDoApp.Presenters
 
             if(!CheckPasswordsEquals(model.Password, model.ConfirmPassword))
             {
-                _view.ShowSnackBar("Passwords do not match");
+                _view.ShowSnackBar(Resource.String.passwordsNotMatch);
                 return;
             }
 
             if(!CheckEmailFree(model.Email))
             {
-                _view.ShowSnackBar("User with this email was already exists");
+                _view.ShowSnackBar(Resource.String.userWithThisEmailExists);
                 return;
             }
             
@@ -48,7 +48,7 @@ namespace ToDoApp.Presenters
 
                 _view.SendSuccess();
             }
-            else _view.ShowSnackBar("Error while registering user. Please, try later");
+            else _view.ShowSnackBar(Resource.String.errorWhileRegisterTryLater);
         }
 
         private bool CheckEmailFree(string email)

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Globalization;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using Java.Util;
 using ToDoApp.Common.Models;
 using ToDoApp.Interfaces.Fragments;
 
@@ -27,35 +29,35 @@ namespace ToDoApp.Fragments
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(Activity);
             LayoutInflater inflater = Activity.LayoutInflater;
-            var view = inflater.Inflate(ToDoApp.Resources.Resource.Layout.dialog_userTask, null);
+            var view = inflater.Inflate(Resource.Layout.dialog_userTask, null);
 
-            var nameField = view.FindViewById<EditText>(ToDoApp.Resources.Resource.Id.dialog_userTask_name);
-            var descriptionField = view.FindViewById<EditText>(ToDoApp.Resources.Resource.Id.dialog_userTask_description);
+            var nameField = view.FindViewById<EditText>(Resource.Id.dialog_userTask_name);
+            var descriptionField = view.FindViewById<EditText>(Resource.Id.dialog_userTask_description);
 
-            var headerText = view.FindViewById<TextView>(ToDoApp.Resources.Resource.Id.dialog_userTask_text);
+            var headerText = view.FindViewById<TextView>(Resource.Id.dialog_userTask_text);
 
             if (_taskModel != null)
             {
                 nameField.Text = _taskModel.Name;
                 descriptionField.Text = _taskModel.Description;
-                headerText.Text = "EDIT TASK";
+                headerText.Text = GetString(Resource.String.editTask);
 
                 builder.SetView(view)
-                    .SetPositiveButton("Edit", (s, e) =>
+                    .SetPositiveButton(Resource.String.edit, (s, e) =>
                     {
                         _taskModel.Name = nameField.Text;
                         _taskModel.Description = descriptionField.Text;
 
                         _listener.OnConfirmTaskEdit(_taskModel);
                     })
-                    .SetNegativeButton("Cancel", (s, e) => { });
+                    .SetNegativeButton(Resource.String.cancel, (s, e) => { });
             }
             else
             {
-                headerText.Text = "CREATE NEW TASK";
+                headerText.Text = GetString(Resource.String.createNewTask);
 
                 builder.SetView(view)
-                    .SetPositiveButton("Create", (s, e) =>
+                    .SetPositiveButton(Resource.String.create, (s, e) =>
                     {
                         _taskModel = new UserTaskModel()
                         {
@@ -65,7 +67,7 @@ namespace ToDoApp.Fragments
                         };
                         _listener.OnConfirmTaskCreate(_taskModel);
                     })
-                    .SetNegativeButton("Cancel", (s, e) => { });
+                    .SetNegativeButton(Resource.String.cancel, (s, e) => { });
             }
             
             return builder.Create();

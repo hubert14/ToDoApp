@@ -34,7 +34,7 @@ namespace ToDoApp.Presenters
 
             if (user == null)
             {
-                _view.ShowSnackBar("Invalid password or email");
+                _view.ShowSnackBar(Resource.String.invalidPasswordOrEmail);
                 _view.HideProgressBar();
                 return;
             }

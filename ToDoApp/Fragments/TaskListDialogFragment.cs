@@ -27,34 +27,34 @@ namespace ToDoApp.Fragments
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(Activity);
             LayoutInflater inflater = Activity.LayoutInflater;
-            var view = inflater.Inflate(ToDoApp.Resources.Resource.Layout.dialog_taskList, null);
+            var view = inflater.Inflate(Resource.Layout.dialog_taskList, null);
 
-            var headerText = view.FindViewById<TextView>(ToDoApp.Resources.Resource.Id.dialog_list_text);
+            var headerText = view.FindViewById<TextView>(Resource.Id.dialog_list_text);
 
             if (_taskList == null)
             {
-                headerText.Text = "CREATE NEW TASK LIST";
+                headerText.Text = GetString(Resource.String.createNewTaskList).ToUpper();
                 builder.SetView(view)
-                    .SetPositiveButton("Create", (s, e) =>
+                    .SetPositiveButton(Resource.String.create, (s, e) =>
                     {
-                        var nameField = view.FindViewById<EditText>(ToDoApp.Resources.Resource.Id.dialog_list_name);
+                        var nameField = view.FindViewById<EditText>(Resource.Id.dialog_list_name);
                         _listener.OnConfirmListCreate(nameField.Text);
                     })
-                    .SetNegativeButton("Cancel", (s, e) => { });
+                    .SetNegativeButton(Resource.String.cancel, (s, e) => { });
             }
             else
             {
-                var nameField = view.FindViewById<EditText>(ToDoApp.Resources.Resource.Id.dialog_list_name);
+                var nameField = view.FindViewById<EditText>(Resource.Id.dialog_list_name);
                 nameField.Text = _taskList.Name;
-                headerText.Text = "EDIT TASK LIST NAME";
+                headerText.Text = GetString(Resource.String.editTaskListName).ToUpper();
 
                 builder.SetView(view)
-                    .SetPositiveButton("Edit", (s, e) =>
+                    .SetPositiveButton(Resource.String.edit, (s, e) =>
                     {
                         _taskList.Name = nameField.Text;
                         _listener.OnConfirmListEdit(_taskList);
                     })
-                    .SetNegativeButton("Cancel", (s, e) => { });
+                    .SetNegativeButton(Resource.String.cancel, (s, e) => { });
             }
 
             return builder.Create();

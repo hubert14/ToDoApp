@@ -41,7 +41,7 @@ namespace ToDoApp.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(ToDoApp.Resources.Resource.Layout.activity_main);
+            SetContentView(Resource.Layout.activity_main);
             Initialize();
         }
 
@@ -54,14 +54,14 @@ namespace ToDoApp.Activities
             InitDrawer();
             InitNavigationView();
 
-            _emptyTaskListsText = FindViewById<TextView>(ToDoApp.Resources.Resource.Id.main_create_list_text);
+            _emptyTaskListsText = FindViewById<TextView>(Resource.Id.main_create_list_text);
 
             _presenter = new MainPresenter(this);
         }
 
         private void InitTaskListView()
         {
-            _taskListView = FindViewById<RecyclerView>(ToDoApp.Resources.Resource.Id.main_task_list);
+            _taskListView = FindViewById<RecyclerView>(Resource.Id.main_task_list);
 
             var layoutManager = new LinearLayoutManager(this);
             _taskListView.SetLayoutManager(layoutManager);
@@ -69,25 +69,25 @@ namespace ToDoApp.Activities
 
         private void InitNavigationView()
         {
-            _navigationView = FindViewById<NavigationView>(ToDoApp.Resources.Resource.Id.nav_view);
+            _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
 
             var header = _navigationView.GetHeaderView(0);
-            _headerEmail = header.FindViewById<TextView>(ToDoApp.Resources.Resource.Id.nav_header_email);
-            _headerName = header.FindViewById<TextView>(ToDoApp.Resources.Resource.Id.nav_header_userName);
+            _headerEmail = header.FindViewById<TextView>(Resource.Id.nav_header_email);
+            _headerName = header.FindViewById<TextView>(Resource.Id.nav_header_userName);
 
             _navigationView.SetNavigationItemSelectedListener(this);
         }
 
         private void InitToolbar()
         {
-            _toolbar = FindViewById<Toolbar>(ToDoApp.Resources.Resource.Id.toolbar);
+            _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(_toolbar);
         }
 
         private void InitDrawer()
         {
-            _drawer = FindViewById<DrawerLayout>(ToDoApp.Resources.Resource.Id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, _drawer, _toolbar, ToDoApp.Resources.Resource.String.navigation_drawer_open, ToDoApp.Resources.Resource.String.navigation_drawer_close);
+            _drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, _drawer, _toolbar, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
             _drawer.AddDrawerListener(toggle);
             toggle.SyncState();
 
@@ -95,7 +95,7 @@ namespace ToDoApp.Activities
 
         private void InitFab()
         {
-            _createTaskFAB = FindViewById<FloatingActionButton>(ToDoApp.Resources.Resource.Id.fab);
+            _createTaskFAB = FindViewById<FloatingActionButton>(Resource.Id.fab);
             _createTaskFAB.Click += FabOnClick;
         }
 
@@ -117,10 +117,10 @@ namespace ToDoApp.Activities
             {
                 if (e < 0) return;
                 var item = _taskListAdapter.TaskList[e];
-                var snack = Snackbar.Make(CurrentFocus, "This task has been deleted", Snackbar.LengthLong);
+                var snack = Snackbar.Make(CurrentFocus, Resource.String.taskHasBeenDeleted, Snackbar.LengthLong);
                 var callback = new SnackbarUndoCallback(item, _presenter);
                 snack.AddCallback(callback);
-                snack.SetAction("UNDO", view =>
+                snack.SetAction(Resource.String.undo, view =>
                 {
                     snack.RemoveCallback(callback);
                     _taskListAdapter.NotifyDataSetChanged();
@@ -151,26 +151,23 @@ namespace ToDoApp.Activities
             foreach (var taskList in list)
             {
                 var icon = taskList.IsCompleted
-                    ? ToDoApp.Resources.Resource.Drawable.ic_check_box_green_200_24dp
-                    : ToDoApp.Resources.Resource.Drawable.ic_check_box_outline_blank_red_400_24dp;
+                    ? Resource.Drawable.ic_check_box_green_200_24dp
+                    : Resource.Drawable.ic_check_box_outline_blank_red_400_24dp;
 
                 _navigationView.Menu.Add(taskList.Name).SetIcon(icon);
             }
-
+            _createTaskFAB.Visibility = _navigationView.Menu.HasVisibleItems ? ViewStates.Visible : ViewStates.Gone;
             _emptyTaskListsText.Visibility = _navigationView.Menu.HasVisibleItems ? ViewStates.Gone : ViewStates.Visible;
 
-            _navigationView.Menu.Add("New list").SetIcon(ToDoApp.Resources.Resource.Drawable.ic_playlist_add_black_24dp);
+            _navigationView.Menu.Add(Resource.String.newList).SetIcon(Resource.Drawable.ic_playlist_add_black_24dp);
         }
 
         public void ShowTasks(UserTaskListModel list)
         {
             if (list == null)
             {
-                _createTaskFAB.Visibility = ViewStates.Gone;
                 return;
             }
-
-            if (_createTaskFAB.Visibility == ViewStates.Gone) _createTaskFAB.Visibility = ViewStates.Visible;
             
             Title = list.Name;
 
@@ -194,9 +191,9 @@ namespace ToDoApp.Activities
         public void ShowDeleteListAlert()
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.SetMessage("Are you sure?");
-            builder.SetPositiveButton("Yes", (sender, args) => { _presenter.DeleteList(); });
-            builder.SetNegativeButton("No", (sender, args) => { });
+            builder.SetMessage(Resource.String.areYouSure);
+            builder.SetPositiveButton(Resource.String.yes, (sender, args) => { _presenter.DeleteList(); });
+            builder.SetNegativeButton(Resource.String.no, (sender, args) => { });
             builder.Create().Show();
         }
 
@@ -210,6 +207,11 @@ namespace ToDoApp.Activities
         {
             var dialog = new UserTaskDialogFragment();
             dialog.Show(FragmentManager, "createTask");
+        }
+
+        public string GetStringFromResourceId(int resId)
+        {
+            return GetString(resId);
         }
 
         public void ShowCreateListDialog()
@@ -228,7 +230,7 @@ namespace ToDoApp.Activities
 
         public override void OnBackPressed()
         {
-            DrawerLayout drawer = FindViewById<DrawerLayout>(ToDoApp.Resources.Resource.Id.drawer_layout);
+            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
             if (drawer.IsDrawerOpen(GravityCompat.Start))
                 drawer.CloseDrawer(GravityCompat.Start);
@@ -238,7 +240,7 @@ namespace ToDoApp.Activities
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(ToDoApp.Resources.Resource.Menu.menu_main, menu);
+            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
             return true;
         }
 
@@ -246,19 +248,19 @@ namespace ToDoApp.Activities
         {
             var id = item.ItemId;
 
-            if (id == ToDoApp.Resources.Resource.Id.action_settings)
+            if (id == Resource.Id.action_settings)
             {
                 StartActivity(typeof(SettingsActivity));
                 return true;
             }
 
-            if (id == ToDoApp.Resources.Resource.Id.action_editList)
+            if (id == Resource.Id.action_editList)
             {
                 _presenter.EditListRequest();
                 return true;
             }
 
-            if (id == ToDoApp.Resources.Resource.Id.action_deleteList)
+            if (id == Resource.Id.action_deleteList)
             {
                 _presenter.DeleteListRequest();
                 return true;

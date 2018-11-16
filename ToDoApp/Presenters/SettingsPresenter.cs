@@ -26,7 +26,7 @@ namespace ToDoApp.Presenters
 
             UserService.UpdateUser(User);
 
-            _view.ShowMessage("User info was successfully changed");
+            _view.ShowMessage(Resource.String.userInfoSuccessfulyChanged);
             _view.ShowUserInfo(User);
         }
 

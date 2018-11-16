@@ -25,7 +25,7 @@ namespace ToDoApp.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(ToDoApp.Resources.Resource.Layout.activity_register);
+            SetContentView(Resource.Layout.activity_register);
 
             Initialize();
         }
@@ -40,19 +40,19 @@ namespace ToDoApp.Activities
 
         private void InitFields()
         {
-            _email = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.register_email);
+            _email = FindViewById<EditText>(Resource.Id.register_email);
 
-            _password = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.register_password);
-            _confirmPassword = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.register_confirm_password);
+            _password = FindViewById<EditText>(Resource.Id.register_password);
+            _confirmPassword = FindViewById<EditText>(Resource.Id.register_confirm_password);
 
-            _firstName = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.register_first_name);
-            _lastName = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.register_last_name);
+            _firstName = FindViewById<EditText>(Resource.Id.register_first_name);
+            _lastName = FindViewById<EditText>(Resource.Id.register_last_name);
         }
 
         private void InitButtons()
         {
-            var registerButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.register_register_button);
-            var goToLoginButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.register_backToLogin_button);
+            var registerButton = FindViewById<Button>(Resource.Id.register_register_button);
+            var goToLoginButton = FindViewById<Button>(Resource.Id.register_backToLogin_button);
 
             registerButton.Click += (s,e) => 
             {
@@ -92,8 +92,14 @@ namespace ToDoApp.Activities
 
         public void ShowSnackBar(string message)
         {
-            var view = FindViewById<View>(ToDoApp.Resources.Resource.Id.register_layout);
+            var view = FindViewById<View>(Resource.Id.register_layout);
             Snackbar.Make(view, message, Snackbar.LengthLong).Show();
+        }
+
+        public void ShowSnackBar(int resId)
+        {
+            var view = FindViewById<View>(Resource.Id.register_layout);
+            Snackbar.Make(view, resId, Snackbar.LengthLong).Show();
         }
 
         public void ShowProgressBar()

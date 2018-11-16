@@ -23,7 +23,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:hint="Email" />
+				android:hint="@string/email" />
 		</android.support.design.widget.TextInputLayout>
 
 		<android.support.design.widget.TextInputLayout
@@ -38,18 +38,18 @@
 				android:layout_height="wrap_content"
 				android:singleLine="true"
 				android:inputType="textPassword"
-				android:hint="Password"
+				android:hint="@string/password"
 				android:imeOptions="actionDone"/>
 		</android.support.design.widget.TextInputLayout>
 
 		<Button
-			android:text="Login"
+			android:text="@string/login"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			style="@style/Widget.AppCompat.Button.Colored"
 			android:id="@+id/login_login_button" />
 		<Button
-			android:text="Register"
+			android:text="@string/register"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			style="@style/Widget.AppCompat.Button.Colored"
@@ -62,7 +62,7 @@
 		android:visibility="gone"/>
 	</LinearLayout>
 		<Button
-			android:text="Forgot password"
+			android:text="@string/forgotPassword"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			style="@style/Widget.AppCompat.Button.Borderless.Colored"

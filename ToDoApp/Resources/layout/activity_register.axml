@@ -20,7 +20,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:hint="Email" />
+				android:hint="@string/email" />
 		</android.support.design.widget.TextInputLayout>
 		<android.support.design.widget.TextInputLayout
 			android:id="@+id/register_password_layout"
@@ -33,7 +33,7 @@
 				android:layout_height="wrap_content"
 				android:singleLine="true"
 				android:inputType="textPassword"
-				android:hint="Password" />
+				android:hint="@string/password" />
 		</android.support.design.widget.TextInputLayout>
 		<android.support.design.widget.TextInputLayout
 			android:id="@+id/register_confirm_password_layout"
@@ -46,7 +46,7 @@
 				android:layout_height="wrap_content"
 				android:singleLine="true"
 				android:inputType="textPassword"
-				android:hint="Confirm password" />
+				android:hint="@string/confirmPassword" />
 		</android.support.design.widget.TextInputLayout>
 				<android.support.design.widget.TextInputLayout
 			android:id="@+id/register_first_name_layout"
@@ -57,7 +57,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:hint="First name" />
+				android:hint="@string/firstName" />
 		</android.support.design.widget.TextInputLayout>
 				<android.support.design.widget.TextInputLayout
 			android:id="@+id/register_last_name_layout"
@@ -68,17 +68,17 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:hint="Last name" />
+				android:hint="@string/lastName" />
 		</android.support.design.widget.TextInputLayout>
 		<Button
-			android:text="Register"
+			android:text="@string/register"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			style="@style/Widget.AppCompat.Button.Colored"
 			android:id="@+id/register_register_button"/>
 	</LinearLayout>
 			<Button
-			android:text="I have account"
+			android:text="@string/iHaveAccount"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			style="@style/Widget.AppCompat.Button.Borderless.Colored"

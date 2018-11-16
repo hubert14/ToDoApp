@@ -16,9 +16,6 @@ namespace ToDoApp.Activities
     {
         private SettingsPresenter _presenter;
 
-        private TextView _headerEmail;
-        private TextView _headerName;
-        
         private EditText _firstName;
         private EditText _lastName;
         private Button _confirmButton;
@@ -27,7 +24,7 @@ namespace ToDoApp.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(ToDoApp.Resources.Resource.Layout.activity_settings);
+            SetContentView(Resource.Layout.activity_settings);
             Initialize();
         }
 
@@ -40,14 +37,14 @@ namespace ToDoApp.Activities
 
         private void InitFields()
         {
-            _firstName = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.settings_firstName);
-            _lastName = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.settings_lastName);
+            _firstName = FindViewById<EditText>(Resource.Id.settings_firstName);
+            _lastName = FindViewById<EditText>(Resource.Id.settings_lastName);
         }
 
         private void InitButtons()
         {
-            _confirmButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.settings_confirm_button);
-            _deleteButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.settings_delete_button);
+            _confirmButton = FindViewById<Button>(Resource.Id.settings_confirm_button);
+            _deleteButton = FindViewById<Button>(Resource.Id.settings_delete_button);
 
             _confirmButton.Click += (s,e) => { _presenter.EditUserRequest(); };
             _deleteButton.Click += (s,e) => { _presenter.DeleteUserRequest(); };
@@ -56,9 +53,9 @@ namespace ToDoApp.Activities
         public void ShowDeleteUserAlert()
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.SetMessage("Are you sure? This action is irreversible");
-            builder.SetPositiveButton("Yes", (sender, args) => { _presenter.DeleteUser(); });
-            builder.SetNegativeButton("No", (sender, args) => { });
+            builder.SetMessage(Resource.String.areYouSure);
+            builder.SetPositiveButton(Resource.String.yes, (sender, args) => { _presenter.DeleteUser(); });
+            builder.SetNegativeButton(Resource.String.no, (sender, args) => { });
             builder.Create().Show();
         }
 
@@ -80,8 +77,14 @@ namespace ToDoApp.Activities
 
         public void ShowMessage(string message)
         {
-            var view = FindViewById<View>(ToDoApp.Resources.Resource.Id.settings_layout);
+            var view = FindViewById<View>(Resource.Id.settings_layout);
             Snackbar.Make(view, message, Snackbar.LengthLong).Show();
+        }
+
+        public void ShowMessage(int resId)
+        {
+            var view = FindViewById<View>(Resource.Id.settings_layout);
+            Snackbar.Make(view, resId, Snackbar.LengthLong).Show();
         }
 
         public void GoToLoginActivity()

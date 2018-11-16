@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Android.App;
 using Android.Views;
 using ToDoApp.Common.Models;
 using ToDoApp.Interfaces.Views;
@@ -26,7 +27,8 @@ namespace ToDoApp.Presenters
 
         public void ItemPressed(IMenuItem item)
         {
-            if (item.TitleFormatted.ToString() == "New list")
+            
+            if (item.TitleFormatted.ToString() == _view.GetStringFromResourceId(Resource.String.newList))
             {
                 _view.ShowCreateListDialog();
                 return;

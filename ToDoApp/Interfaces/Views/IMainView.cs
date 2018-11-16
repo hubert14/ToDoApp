@@ -16,5 +16,7 @@ namespace ToDoApp.Interfaces.Views
 
         void ShowEditTaskDialog(UserTaskModel model);
         void ShowCreateTaskDialog();
+
+        string GetStringFromResourceId(int resId);
     }
 }

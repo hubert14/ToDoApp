@@ -18,9 +18,9 @@ namespace ToDoApp.Presenters
             if (FindEmailInDatabase(email))
             {
                 SendMessage(email);
-                _view.ShowSnackBar("Message will be sended on your E-Mail");
+                _view.ShowSnackBar(Resource.String.messageWillBeSended);
             }
-            else _view.ShowSnackBar("User with that E-Mail was not found");
+            else _view.ShowSnackBar(Resource.String.userWithThatEmailNotFound);
         }
 
         private void SendMessage(string email)

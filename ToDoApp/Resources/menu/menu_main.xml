@@ -5,13 +5,13 @@
     <item
         android:id="@+id/action_editList"
         android:orderInCategory="98"
-        android:title="Edit list"
+        android:title="@string/editList"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_deleteList"
         android:orderInCategory="99"
-        android:title="Delete list"
+        android:title="@string/deleteList"
         app:showAsAction="never" />
 
     <item

@@ -5,11 +5,11 @@
   <item
     android:id="@+id/userTask_task_edit"
     android:orderInCategory="98"
-    android:title="Edit task"
+    android:title="@string/editTask"
     app:showAsAction="never" />
   <item
     android:id="@+id/userTask_task_delete"
     android:orderInCategory="99"
-    android:title="Delete task"
+    android:title="@string/deleteTask"
     app:showAsAction="never" />
 </menu>

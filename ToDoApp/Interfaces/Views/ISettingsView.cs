@@ -8,6 +8,7 @@ namespace ToDoApp.Interfaces.Views
         void ShowUserInfo(UserModel user);
         UserModel GetUserInfo();
         void ShowMessage(string message);
+        void ShowMessage(int resId);
         void GoToLoginActivity();
     }
 }

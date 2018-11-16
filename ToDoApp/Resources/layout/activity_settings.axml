@@ -19,7 +19,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:hint="First name" />
+				android:hint="@string/firstName" />
 		</android.support.design.widget.TextInputLayout>
 
 		<android.support.design.widget.TextInputLayout
@@ -32,11 +32,11 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:hint="Last name" />
+				android:hint="@string/lastName" />
 		</android.support.design.widget.TextInputLayout>
 
 		<Button
-			android:text="Confirm"
+			android:text="@string/confirm"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_margin="8dp"
@@ -47,7 +47,7 @@
 	<Button
 		android:layout_alignParentBottom="true"
 		style="@style/Widget.AppCompat.Button.Borderless.Colored"
-		android:text="Delete user"
+		android:text="@string/deleteProfile"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/settings_delete_button" />

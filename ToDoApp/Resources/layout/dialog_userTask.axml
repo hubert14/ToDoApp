@@ -10,7 +10,6 @@
 		android:text="User task"
 		android:layout_height="wrap_content"
 		android:textSize="20dp"
-		android:fontFamily="@font/arial"
 		android:gravity="center"
 		android:background="@color/colorAccent"
 		android:textColor="#ffffffff" />
@@ -24,7 +23,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:hint="Name" />
+				android:hint="@string/name" />
 		</android.support.design.widget.TextInputLayout>
 
 		<android.support.design.widget.TextInputLayout
@@ -37,6 +36,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:hint="Description" />
+				android:hint="@string/description" />
 		</android.support.design.widget.TextInputLayout>
 </LinearLayout>

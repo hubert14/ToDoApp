@@ -17,11 +17,10 @@
 		android:id="@+id/main_create_list_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Time to create task list. Open left menu and create new list"
+		android:text="@string/timeToCreateTask"
 		android:textAlignment="center"
 		android:gravity="center"
 		android:layout_centerInParent="true"
 		android:layout_margin="50dp"
-		android:textSize="16dp"
-		android:fontFamily="@font/arial"/>
+		android:textSize="16dp"/>
 </RelativeLayout>

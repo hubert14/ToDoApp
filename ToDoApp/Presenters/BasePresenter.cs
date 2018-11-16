@@ -7,11 +7,24 @@ namespace ToDoApp.Presenters
     public class BasePresenter
     {
         protected static ISharedPreferences SharedPreferences;
-        protected static UserModel User;
 
-        protected static UserService UserService { get; } = new UserService();
-        protected static TaskService TaskService { get; } = new TaskService();
-        protected static TaskListService TaskListService => new TaskListService(User.Id);
+        private static UserModel _user;
+        protected static UserModel User
+        {
+            get => _user;
+            set
+            {
+                _user = value;
+                UserService = new UserService();
+                TaskListService = new TaskListService(value.Id);
+                TaskService = new TaskService();
+            }
+        }
+
+        protected static UserService UserService { get; private set; } = new UserService();
+
+        protected static TaskService TaskService { get; private set; }
+        protected static TaskListService TaskListService { get; private set; }
 
         protected static void SaveLoggedUser(string email)
         {

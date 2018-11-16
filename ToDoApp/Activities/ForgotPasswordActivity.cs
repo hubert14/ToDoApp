@@ -6,10 +6,10 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using ToDoApp.Activities.Interfaces;
-using ToDoApp.Presenters.Authorize;
+using ToDoApp.Interfaces.Views;
+using ToDoApp.Presenters;
 
-namespace ToDoApp.Activities.Authorize
+namespace ToDoApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
     public class ForgotPasswordActivity : AppCompatActivity, IForgotPasswordView
@@ -19,7 +19,7 @@ namespace ToDoApp.Activities.Authorize
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.activity_forgotPassword);
+            SetContentView(ToDoApp.Resources.Resource.Layout.activity_forgotPassword);
 
             _presenter = new ForgotPasswordPresenter(this);
             InitButtons();
@@ -27,7 +27,7 @@ namespace ToDoApp.Activities.Authorize
 
         private void InitButtons()
         {
-            var confirmButton = FindViewById<Button>(Resource.Id.forgot_password_confirm_button);
+            var confirmButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.forgot_password_confirm_button);
             confirmButton.Click += (s, e) =>
             {
                 HideKeyboard();
@@ -44,13 +44,13 @@ namespace ToDoApp.Activities.Authorize
 
         public string GetEmail()
         {
-            var email = FindViewById<EditText>(Resource.Id.forgot_password_email);
+            var email = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.forgot_password_email);
             return email.Text;
         }
 
         public void ShowSnackBar(string message)
         {
-            var view = FindViewById<View>(Resource.Id.forgot_password_layout);
+            var view = FindViewById<View>(ToDoApp.Resources.Resource.Id.forgot_password_layout);
             Snackbar.Make(view, message, Snackbar.LengthLong);
         }
 

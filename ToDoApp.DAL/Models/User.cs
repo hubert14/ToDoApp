@@ -7,7 +7,6 @@ namespace ToDoApp.DAL.Models
     {
         public User()
         {
-            
         }
 
         public User(IList<UserTaskList> list)

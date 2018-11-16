@@ -1,6 +1,6 @@
-﻿using ToDoApp.Models.Authorize;
+﻿using ToDoApp.Common.Models.Authorize;
 
-namespace ToDoApp.Activities.Interfaces
+namespace ToDoApp.Interfaces.Views
 {
     public interface IRegisterView
     {

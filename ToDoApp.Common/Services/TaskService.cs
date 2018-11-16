@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ToDoApp.Common.Models;
+﻿using ToDoApp.Common.Models;
 using ToDoApp.Common.Utils;
 using ToDoApp.DAL.Repositories;
 
@@ -9,7 +6,7 @@ namespace ToDoApp.Common.Services
 {
     public class TaskService
     {
-        private TaskRepository _repository;
+        private readonly TaskRepository _repository;
 
         public TaskService()
         {

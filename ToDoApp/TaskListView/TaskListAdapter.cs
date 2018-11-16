@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Android.Content;
-using Android.Graphics;
 using Android.Support.V7.Widget;
 using Android.Support.V7.Widget.Helper;
 using Android.Views;
@@ -42,7 +40,7 @@ namespace ToDoApp.TaskListView
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            View itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.userTask_view, parent, false);
+            View itemView = LayoutInflater.From(parent.Context).Inflate(Resources.Resource.Layout.userTask_view, parent, false);
 
             TaskListViewHolder vh = new TaskListViewHolder(itemView);
             InitHandlers(vh);
@@ -56,19 +54,19 @@ namespace ToDoApp.TaskListView
                 CheckboxClickHandler?.Invoke(this, vh.AdapterPosition);
             };
 
-            var toolbar = vh.ItemView.FindViewById<ImageView>(Resource.Id.task_toolbar);
+            var toolbar = vh.ItemView.FindViewById<ImageView>(Resources.Resource.Id.task_toolbar);
             toolbar.Click += (sender, args) =>
             {
                 var popup = new PopupMenu(_context, toolbar);
 
-                popup.Inflate(Resource.Menu.menu_task);
+                popup.Inflate(Resources.Resource.Menu.menu_task);
                 popup.MenuItemClick += (o, eventArgs) =>
                 {
-                    if (eventArgs.Item.ItemId == Resource.Id.userTask_task_delete)
+                    if (eventArgs.Item.ItemId == Resources.Resource.Id.userTask_task_delete)
                     {
                         InvokeDeleteHandler(vh.AdapterPosition);
                     }
-                    else if (eventArgs.Item.ItemId == Resource.Id.userTask_task_edit)
+                    else if (eventArgs.Item.ItemId == Resources.Resource.Id.userTask_task_edit)
                     {
                         EditHandler?.Invoke(this, vh.AdapterPosition);
                     }

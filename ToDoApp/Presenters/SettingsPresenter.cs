@@ -1,4 +1,4 @@
-﻿using ToDoApp.Activities.Interfaces;
+﻿using ToDoApp.Interfaces.Views;
 
 namespace ToDoApp.Presenters
 {

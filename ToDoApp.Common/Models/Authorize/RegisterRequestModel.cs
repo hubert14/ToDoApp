@@ -1,4 +1,4 @@
-﻿namespace ToDoApp.Models.Authorize
+﻿namespace ToDoApp.Common.Models.Authorize
 {
     public class RegisterRequestModel
     {

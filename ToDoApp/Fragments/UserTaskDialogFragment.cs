@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ToDoApp.Common.Models;
+using ToDoApp.Interfaces.Fragments;
 
 namespace ToDoApp.Fragments
 {
-    public interface IUserTaskDialogListener
-    {
-        void OnConfirmTaskCreate(UserTaskModel taskModel);
-        void OnConfirmTaskEdit(UserTaskModel taskModel);
-    }
-
     public class UserTaskDialogFragment : DialogFragment
     {
         private IUserTaskDialogListener _listener;
@@ -38,17 +27,18 @@ namespace ToDoApp.Fragments
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(Activity);
             LayoutInflater inflater = Activity.LayoutInflater;
-            var view = inflater.Inflate(Resource.Layout.dialog_userTask, null);
+            var view = inflater.Inflate(ToDoApp.Resources.Resource.Layout.dialog_userTask, null);
 
-            var nameField = view.FindViewById<EditText>(Resource.Id.dialog_userTask_name);
-            var descriptionField = view.FindViewById<EditText>(Resource.Id.dialog_userTask_description);
-            var headerTextView = view.FindViewById<TextView>(Resource.Id.dialog_userTask_text);
+            var nameField = view.FindViewById<EditText>(ToDoApp.Resources.Resource.Id.dialog_userTask_name);
+            var descriptionField = view.FindViewById<EditText>(ToDoApp.Resources.Resource.Id.dialog_userTask_description);
+
+            var headerText = view.FindViewById<TextView>(ToDoApp.Resources.Resource.Id.dialog_userTask_text);
 
             if (_taskModel != null)
             {
                 nameField.Text = _taskModel.Name;
                 descriptionField.Text = _taskModel.Description;
-                headerTextView.Text = "EDIT TASK";
+                headerText.Text = "EDIT TASK";
 
                 builder.SetView(view)
                     .SetPositiveButton("Edit", (s, e) =>
@@ -62,7 +52,7 @@ namespace ToDoApp.Fragments
             }
             else
             {
-                headerTextView.Text = "CREATE NEW TASK";
+                headerText.Text = "CREATE NEW TASK";
 
                 builder.SetView(view)
                     .SetPositiveButton("Create", (s, e) =>

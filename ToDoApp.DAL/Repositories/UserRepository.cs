@@ -28,7 +28,7 @@ namespace ToDoApp.DAL.Repositories
 
             var id = realm.All<User>()?.LastOrDefault()?.Id ?? 0;
             model.Id = ++id;
-
+            while (realm.All<User>().FirstOrDefault(x => x.Id == id) != null) id++;
             realm.Write(() => { realm.Add(model); });
             return true;
         }

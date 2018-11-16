@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using ToDoApp.Common.Models;
 using ToDoApp.Common.Utils;
 using ToDoApp.DAL.Repositories;
@@ -9,7 +7,7 @@ namespace ToDoApp.Common.Services
 {
     public class TaskListService
     {
-        private TaskListRepository _repository;
+        private readonly TaskListRepository _repository;
 
         public TaskListService(int userId)
         {

@@ -1,7 +1,9 @@
-﻿using ToDoApp.Activities.Interfaces;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using ToDoApp.Common.Models;
+using ToDoApp.Interfaces.Views;
 
-namespace ToDoApp.Presenters.Authorize
+namespace ToDoApp.Presenters
 {
     public class LoginPresenter : BasePresenter
     {
@@ -17,15 +19,23 @@ namespace ToDoApp.Presenters.Authorize
             _view = null;
         }
 
-        public void SendLogin()
+        public async void SendLogin()
         {
-            var model = _view.GetData();
+            _view.ShowProgressBar();
 
-            var user = Login(model.Email, model.Password);
+            var model = _view.GetData();
+            UserModel user = null;
+
+            await Task.Run(async () =>
+            {
+                Thread.Sleep(2500);
+                user = Login(model.Email, model.Password);
+            });
 
             if (user == null)
             {
                 _view.ShowSnackBar("Invalid password or email");
+                _view.HideProgressBar();
                 return;
             }
 

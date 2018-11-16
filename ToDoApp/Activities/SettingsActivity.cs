@@ -4,9 +4,8 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using ToDoApp.Activities.Authorize;
-using ToDoApp.Activities.Interfaces;
 using ToDoApp.Common.Models;
+using ToDoApp.Interfaces.Views;
 using ToDoApp.Presenters;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 
@@ -28,7 +27,7 @@ namespace ToDoApp.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.activity_settings);
+            SetContentView(ToDoApp.Resources.Resource.Layout.activity_settings);
             Initialize();
         }
 
@@ -41,14 +40,14 @@ namespace ToDoApp.Activities
 
         private void InitFields()
         {
-            _firstName = FindViewById<EditText>(Resource.Id.settings_firstName);
-            _lastName = FindViewById<EditText>(Resource.Id.settings_lastName);
+            _firstName = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.settings_firstName);
+            _lastName = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.settings_lastName);
         }
 
         private void InitButtons()
         {
-            _confirmButton = FindViewById<Button>(Resource.Id.settings_confirm_button);
-            _deleteButton = FindViewById<Button>(Resource.Id.settings_delete_button);
+            _confirmButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.settings_confirm_button);
+            _deleteButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.settings_delete_button);
 
             _confirmButton.Click += (s,e) => { _presenter.EditUserRequest(); };
             _deleteButton.Click += (s,e) => { _presenter.DeleteUserRequest(); };
@@ -81,7 +80,7 @@ namespace ToDoApp.Activities
 
         public void ShowMessage(string message)
         {
-            var view = FindViewById<View>(Resource.Id.settings_layout);
+            var view = FindViewById<View>(ToDoApp.Resources.Resource.Id.settings_layout);
             Snackbar.Make(view, message, Snackbar.LengthLong).Show();
         }
 

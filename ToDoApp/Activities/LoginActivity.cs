@@ -6,15 +6,16 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using ToDoApp.Activities.Interfaces;
-using ToDoApp.Models.Authorize;
-using ToDoApp.Presenters.Authorize;
+using ToDoApp.Common.Models.Authorize;
+using ToDoApp.Interfaces.Views;
+using ToDoApp.Presenters;
 
-namespace ToDoApp.Activities.Authorize
+namespace ToDoApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
     public class LoginActivity : AppCompatActivity, ILoginView
     {
+        private ProgressBar _progress;
         private LoginPresenter _presenter;
         private EditText _email;
         private EditText _password;
@@ -22,7 +23,7 @@ namespace ToDoApp.Activities.Authorize
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.activity_login);
+            SetContentView(ToDoApp.Resources.Resource.Layout.activity_login);
 
             Initialize();
         }
@@ -32,14 +33,15 @@ namespace ToDoApp.Activities.Authorize
             InitFields();
             InitButtons();
 
+            _progress = FindViewById<ProgressBar>(ToDoApp.Resources.Resource.Id.login_progress_bar);
             _presenter = new LoginPresenter(this);
         }
 
         private void InitFields()
         {
-            _email = FindViewById<EditText>(Resource.Id.login_email);
+            _email = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.login_email);
 
-            _password = FindViewById<EditText>(Resource.Id.login_password);
+            _password = FindViewById<EditText>(ToDoApp.Resources.Resource.Id.login_password);
             _password.EditorAction += (s,e) => {
                 if (e.ActionId == ImeAction.Done)
                 {
@@ -50,9 +52,9 @@ namespace ToDoApp.Activities.Authorize
 
         private void InitButtons()
         {
-            var loginButton = FindViewById<Button>(Resource.Id.login_login_button);
-            var forgotPasswordButton = FindViewById<Button>(Resource.Id.login_forgotPassword_button);
-            var registerButton = FindViewById<Button>(Resource.Id.login_register_button);
+            var loginButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.login_login_button);
+            var forgotPasswordButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.login_forgotPassword_button);
+            var registerButton = FindViewById<Button>(ToDoApp.Resources.Resource.Id.login_register_button);
 
             loginButton.Click += Login;
             forgotPasswordButton.Click += (s, e) => { StartActivity(typeof(ForgotPasswordActivity)); };
@@ -91,18 +93,18 @@ namespace ToDoApp.Activities.Authorize
 
         public void ShowSnackBar(string message)
         {
-            var view = FindViewById<View>(Resource.Id.login_layout);
+            var view = FindViewById<View>(ToDoApp.Resources.Resource.Id.login_layout);
             Snackbar.Make(view, message, Snackbar.LengthLong).Show();
         }
 
         public void ShowProgressBar()
         {
-            throw new NotImplementedException();
+            _progress.Visibility = ViewStates.Visible;
         }
 
         public void HideProgressBar()
         {
-            throw new NotImplementedException();
+            _progress.Visibility = ViewStates.Gone;
         }
     }
 }

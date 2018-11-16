@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Realms;
 using ToDoApp.DAL.Models;
 
@@ -25,6 +22,8 @@ namespace ToDoApp.DAL.Repositories
             task.RefList = item;
 
             var id = realm.All<UserTask>().LastOrDefault()?.Id ?? 0;
+            while(realm.All<UserTask>().FirstOrDefault(x => x.Id == id) != null) id++;
+
             task.Id = ++id;
 
             realm.Write(() =>

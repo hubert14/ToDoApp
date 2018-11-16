@@ -7,6 +7,7 @@
 	android:layout_height="match_parent"
 	android:padding="8dp"
 	android:id="@+id/login_layout">
+
 	<LinearLayout
 		android:orientation="vertical"
 		android:layout_width="match_parent"
@@ -53,12 +54,13 @@
 			android:layout_height="wrap_content"
 			style="@style/Widget.AppCompat.Button.Colored"
 			android:id="@+id/login_register_button" />
-	</LinearLayout>
-	<LinearLayout
-		android:orientation="vertical"
-		android:layout_width="match_parent"
+			<ProgressBar
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true">
+		android:id="@+id/login_progress_bar"
+		android:layout_margin="5dp"
+		android:visibility="gone"/>
+	</LinearLayout>
 		<Button
 			android:text="Forgot password"
 			android:layout_width="match_parent"
@@ -66,5 +68,4 @@
 			style="@style/Widget.AppCompat.Button.Borderless.Colored"
 			android:id="@+id/login_forgotPassword_button"
 			android:layout_alignParentBottom="true"/>
-	</LinearLayout>
 </RelativeLayout>

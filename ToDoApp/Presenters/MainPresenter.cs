@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Android.App;
 using Android.Views;
-using ToDoApp.Activities.Interfaces;
 using ToDoApp.Common.Models;
-using ToDoApp.TaskListView;
+using ToDoApp.Interfaces.Views;
 
 namespace ToDoApp.Presenters
 {

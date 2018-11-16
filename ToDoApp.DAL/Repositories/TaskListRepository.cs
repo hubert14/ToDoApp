@@ -16,29 +16,6 @@ namespace ToDoApp.DAL.Repositories
             _databasePath = databaseName;
         }
 
-        private void InitTable()
-        {
-            var taskList = new UserTaskList(new List<UserTask>())
-            {
-                Id = 1,
-                Name = "taskList1",
-            };
-            taskList.UserTasks.Add(new UserTask() { Id = 2, Name = "fdbd", Description = "dwqnggfdgsjdwqj", Checked = false });
-            taskList.UserTasks.Add(new UserTask() { Id = 3, Name = "dwqnj", Description = "dwqnjdwqj", Checked = false });
-            taskList.UserTasks.Add(new UserTask() { Id = 4, Name = "gfdsgs", Description = "gfsd", Checked = true });
-
-            var taskList2 = new UserTaskList(new List<UserTask>())
-            {
-                Id = 2,
-                Name = "taskList2",
-            };
-            taskList2.UserTasks.Add(new UserTask() { Id = 5, Name = "brttr", Description = "dwqnggfdgsjdwqj", Checked = false });
-            taskList2.UserTasks.Add(new UserTask() { Id = 6, Name = "bgfbg", Description = "dwqnjdwqj", Checked = true });
-            taskList2.UserTasks.Add(new UserTask() { Id = 7, Name = "gffdsfesfdsgs", Description = "gfsd", Checked = true });
-
-            var list = new List<UserTaskList> {taskList, taskList2};
-        }
-
         public List<UserTaskList> GetAllTaskLists()
         {
             var realm = Realm.GetInstance(_databasePath);
@@ -59,7 +36,7 @@ namespace ToDoApp.DAL.Repositories
 
             var id = realm.All<UserTaskList>()?.LastOrDefault()?.Id ?? 0;
             model.Id = ++id;
-            
+            while (realm.All<UserTaskList>().FirstOrDefault(x => x.Id == id) != null) id++;
             realm.Write(() =>
             {
                 realm.Add(model);

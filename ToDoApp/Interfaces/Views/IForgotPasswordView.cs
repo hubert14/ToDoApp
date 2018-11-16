@@ -1,4 +1,4 @@
-﻿namespace ToDoApp.Activities.Interfaces
+﻿namespace ToDoApp.Interfaces.Views
 {
     public interface IForgotPasswordView
     {

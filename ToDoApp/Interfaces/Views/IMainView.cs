@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ToDoApp.Common.Models;
 
-namespace ToDoApp.Activities.Interfaces
+namespace ToDoApp.Interfaces.Views
 {
     public interface IMainView
     {

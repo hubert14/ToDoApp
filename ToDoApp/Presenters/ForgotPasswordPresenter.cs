@@ -1,6 +1,6 @@
-﻿using ToDoApp.Activities.Interfaces;
+﻿using ToDoApp.Interfaces.Views;
 
-namespace ToDoApp.Presenters.Authorize
+namespace ToDoApp.Presenters
 {
     public class ForgotPasswordPresenter : BasePresenter
     {
@@ -25,7 +25,7 @@ namespace ToDoApp.Presenters.Authorize
 
         private void SendMessage(string email)
         {
-
+            // Not implemented, because need backend
         }
 
         private bool FindEmailInDatabase(string email)

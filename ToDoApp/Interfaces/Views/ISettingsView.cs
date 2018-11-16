@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ToDoApp.Common.Models;
+﻿using ToDoApp.Common.Models;
 
-namespace ToDoApp.Activities.Interfaces
+namespace ToDoApp.Interfaces.Views
 {
     public interface ISettingsView
     {

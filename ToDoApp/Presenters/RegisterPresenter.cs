@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using ToDoApp.Activities.Authorize;
-using ToDoApp.Activities.Interfaces;
-using ToDoApp.Common.Models;
+﻿using ToDoApp.Common.Models;
+using ToDoApp.Interfaces.Views;
 
-namespace ToDoApp.Presenters.Authorize
+namespace ToDoApp.Presenters
 {
     public class RegisterPresenter : BasePresenter
     {
@@ -19,7 +17,7 @@ namespace ToDoApp.Presenters.Authorize
             _view = null;
         }
 
-        public void SendRegister()
+        public async void SendRegister()
         {
             var model = _view.GetData();
 

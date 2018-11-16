@@ -1,8 +1,6 @@
-﻿using System;
-using Android.Support.V7.Widget;
+﻿using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using ToDoApp.Activities;
 
 namespace ToDoApp.TaskListView
 {
@@ -18,13 +16,13 @@ namespace ToDoApp.TaskListView
 
         public TaskListViewHolder(View itemView) : base(itemView)
         {
-            CheckBox = itemView.FindViewById<CheckBox>(Resource.Id.userTask_checkBox);
+            CheckBox = itemView.FindViewById<CheckBox>(Resources.Resource.Id.userTask_checkBox);
 
-            Name = itemView.FindViewById<TextView>(Resource.Id.userTask_task_name);
-            Description = itemView.FindViewById<TextView>(Resource.Id.userTask_task_description);
+            Name = itemView.FindViewById<TextView>(Resources.Resource.Id.userTask_task_name);
+            Description = itemView.FindViewById<TextView>(Resources.Resource.Id.userTask_task_description);
 
-            EditButton = itemView.FindViewById<Button>(Resource.Id.userTask_task_edit);
-            DeleteButton = itemView.FindViewById<Button>(Resource.Id.userTask_task_delete);
+            EditButton = itemView.FindViewById<Button>(Resources.Resource.Id.userTask_task_edit);
+            DeleteButton = itemView.FindViewById<Button>(Resources.Resource.Id.userTask_task_delete);
         }
     }
 }

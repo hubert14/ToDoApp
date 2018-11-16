@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ToDoApp.Common.Models;
+﻿using ToDoApp.Common.Models;
 using ToDoApp.Common.Utils;
-using ToDoApp.DAL.Models;
 using ToDoApp.DAL.Repositories;
 
 namespace ToDoApp.Common.Services

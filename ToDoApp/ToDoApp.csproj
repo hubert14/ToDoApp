@@ -62,23 +62,26 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\Interfaces\IForgotPasswordView.cs" />
-    <Compile Include="Activities\Interfaces\IMainView.cs" />
-    <Compile Include="Activities\Interfaces\IRegisterView.cs" />
-    <Compile Include="Activities\Authorize\ForgotPasswordActivity.cs" />
-    <Compile Include="Activities\Interfaces\ILoginView.cs" />
-    <Compile Include="Activities\Interfaces\ISettingsView.cs" />
+    <Compile Include="Interfaces\Views\IForgotPasswordView.cs" />
+    <Compile Include="Interfaces\Views\IMainView.cs" />
+    <Compile Include="Interfaces\Views\IRegisterView.cs" />
+    <Compile Include="Activities\ForgotPasswordActivity.cs" />
+    <Compile Include="Interfaces\Views\ILoginView.cs" />
+    <Compile Include="Interfaces\Views\ISettingsView.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Activities\Authorize\LoginActivity.cs" />
+    <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\SettingsActivity.cs" />
+    <Compile Include="Interfaces\Fragments\ITaskListDialogListener.cs" />
+    <Compile Include="Interfaces\Fragments\IUserTaskDialogListener.cs" />
+    <Compile Include="SnackbarUndoCallback.cs" />
     <Compile Include="Fragments\UserTaskDialogFragment.cs" />
     <Compile Include="Fragments\TaskListDialogFragment.cs" />
     <Compile Include="Presenters\BasePresenter.cs" />
-    <Compile Include="Presenters\Authorize\ForgotPasswordPresenter.cs" />
-    <Compile Include="Presenters\Authorize\LoginPresenter.cs" />
+    <Compile Include="Presenters\ForgotPasswordPresenter.cs" />
+    <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
-    <Compile Include="Activities\Authorize\RegisterActivity.cs" />
-    <Compile Include="Presenters\Authorize\RegisterPresenter.cs" />
+    <Compile Include="Activities\RegisterActivity.cs" />
+    <Compile Include="Presenters\RegisterPresenter.cs" />
     <Compile Include="Presenters\SettingsPresenter.cs" />
     <Compile Include="Presenters\StartPresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

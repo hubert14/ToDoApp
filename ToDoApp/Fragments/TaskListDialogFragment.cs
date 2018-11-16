@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ToDoApp.Common.Models;
+using ToDoApp.Interfaces.Fragments;
 
 namespace ToDoApp.Fragments
 {
-    public interface ITaskListDialogListener
-    {
-        void OnConfirmListCreate(string listName);
-        void OnConfirmListEdit(UserTaskListModel taskList);
-    }
-
     public class TaskListDialogFragment : DialogFragment
     {
         private ITaskListDialogListener _listener;
@@ -38,24 +27,26 @@ namespace ToDoApp.Fragments
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(Activity);
             LayoutInflater inflater = Activity.LayoutInflater;
-            var view = inflater.Inflate(Resource.Layout.dialog_taskList, null);
-            var headerTextView = view.FindViewById<TextView>(Resource.Id.dialog_list_text);
+            var view = inflater.Inflate(ToDoApp.Resources.Resource.Layout.dialog_taskList, null);
+
+            var headerText = view.FindViewById<TextView>(ToDoApp.Resources.Resource.Id.dialog_list_text);
+
             if (_taskList == null)
             {
-                headerTextView.Text = "CREATE NEW TASK LIST";
+                headerText.Text = "CREATE NEW TASK LIST";
                 builder.SetView(view)
                     .SetPositiveButton("Create", (s, e) =>
                     {
-                        var nameField = view.FindViewById<EditText>(Resource.Id.dialog_list_name);
+                        var nameField = view.FindViewById<EditText>(ToDoApp.Resources.Resource.Id.dialog_list_name);
                         _listener.OnConfirmListCreate(nameField.Text);
                     })
                     .SetNegativeButton("Cancel", (s, e) => { });
             }
             else
             {
-                var nameField = view.FindViewById<EditText>(Resource.Id.dialog_list_name);
+                var nameField = view.FindViewById<EditText>(ToDoApp.Resources.Resource.Id.dialog_list_name);
                 nameField.Text = _taskList.Name;
-                headerTextView.Text = "EDIT TASK LIST";
+                headerText.Text = "EDIT TASK LIST NAME";
 
                 builder.SetView(view)
                     .SetPositiveButton("Edit", (s, e) =>
@@ -76,7 +67,7 @@ namespace ToDoApp.Fragments
             {
                 _listener = (ITaskListDialogListener) context;
             }
-            catch (InvalidCastException e)
+            catch (InvalidCastException)
             {
                 throw new InvalidCastException(context + " must implement NoticeDialogListener");
             }

@@ -5,15 +5,16 @@ namespace ToDoApp.TaskListView
 {
     public class TaskListItemTouchHelper : ItemTouchHelper.Callback
     {
-        private TaskListAdapter _adapter;
+        private readonly TaskListAdapter _adapter;
+
         public TaskListItemTouchHelper(TaskListAdapter adapter)
         {
             _adapter = adapter;
         }
         public override int GetMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
         {
-            int dragFlags = ItemTouchHelper.Up | ItemTouchHelper.Down;
-            int swipeFlags = ItemTouchHelper.End;
+            var dragFlags = ItemTouchHelper.Up | ItemTouchHelper.Down;
+            var swipeFlags = ItemTouchHelper.End;
             return MakeMovementFlags(dragFlags, swipeFlags);
         }
 

@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
-using ToDoApp.Activities.Authorize;
 using ToDoApp.Presenters;
 
 namespace ToDoApp.Activities

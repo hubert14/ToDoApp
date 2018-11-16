@@ -27,7 +27,7 @@ namespace ToDoApp.TaskListView
             _context = context;
             TaskList = taskList;
 
-            ItemTouchHelper.Callback callback = new MyItemTouchHelper(this);
+            ItemTouchHelper.Callback callback = new TaskListItemTouchHelper(this);
             ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
             itemTouchHelper.AttachToRecyclerView(view);
         }
@@ -66,7 +66,7 @@ namespace ToDoApp.TaskListView
                 {
                     if (eventArgs.Item.ItemId == Resource.Id.userTask_task_delete)
                     {
-                        DeleteHandler?.Invoke(this, vh.AdapterPosition);
+                        InvokeDeleteHandler(vh.AdapterPosition);
                     }
                     else if (eventArgs.Item.ItemId == Resource.Id.userTask_task_edit)
                     {
@@ -81,33 +81,7 @@ namespace ToDoApp.TaskListView
         {
             DeleteHandler?.Invoke(this, position);
         }
+
         public override int ItemCount => TaskList.Count;
     }
-
-    public class MyItemTouchHelper : ItemTouchHelper.Callback
-    {
-        private TaskListAdapter _adapter;
-        public MyItemTouchHelper(TaskListAdapter adapter)
-        {
-            _adapter = adapter;
-        }
-        public override int GetMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
-        {
-            int dragFlags = ItemTouchHelper.Up | ItemTouchHelper.Down;
-            int swipeFlags = ItemTouchHelper.End;
-            return MakeMovementFlags(dragFlags, swipeFlags);
-        }
-
-        public override bool OnMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
-        {
-            _adapter.NotifyItemMoved(viewHolder.AdapterPosition, target.AdapterPosition);
-            return true;
-        }
-
-        public override void OnSwiped(RecyclerView.ViewHolder viewHolder, int direction)
-        {
-            _adapter.InvokeDeleteHandler(viewHolder.AdapterPosition);
-        }
-    }
-
 }

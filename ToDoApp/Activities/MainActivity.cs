@@ -17,6 +17,7 @@ using ToDoApp.Fragments;
 using ToDoApp.Presenters;
 using ToDoApp.TaskListView;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
+using Object = Java.Lang.Object;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace ToDoApp.Activities
@@ -162,7 +163,15 @@ namespace ToDoApp.Activities
                 {
                     if (e < 0) return;
                     var item = _taskListAdapter.TaskList[e];
-                    _presenter.DeleteTask(item);
+                    var snack = Snackbar.Make(CurrentFocus, "This task has been deleted", Snackbar.LengthLong);
+                    var callback = new UndoCallback(item, _presenter);
+                    snack.AddCallback(callback);
+                    snack.SetAction("UNDO", view =>
+                    {
+                        snack.RemoveCallback(callback);
+                        _taskListAdapter.NotifyDataSetChanged();
+                    });
+                    snack.Show();
                 };
             }
         }
@@ -274,4 +283,23 @@ namespace ToDoApp.Activities
             _presenter.UpdateViewRequest();
         }
     }
+
+    public class UndoCallback : BaseTransientBottomBar.BaseCallback
+    {
+        private readonly UserTaskModel _item;
+        private readonly MainPresenter _presenter;
+
+        public UndoCallback(UserTaskModel item, MainPresenter presenter)
+        {
+            _item = item;
+            _presenter = presenter;
+        }
+
+        public override void OnDismissed(Object transientBottomBar, int @event)
+        {
+            _presenter.DeleteTask(_item);
+            base.OnDismissed(transientBottomBar, @event);
+        }
+    }
+
 }

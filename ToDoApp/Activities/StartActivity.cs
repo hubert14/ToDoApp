@@ -5,6 +5,7 @@ using ToDoApp.Presenters;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Push;
 
 namespace ToDoApp.Activities
 {
@@ -17,7 +18,7 @@ namespace ToDoApp.Activities
         {
             base.OnCreate(savedInstanceState);
             AppCenter.Start("dfaba3e4-1876-4b13-b2dc-bad81b1c64f5",
-                typeof(Analytics), typeof(Crashes));
+                typeof(Analytics), typeof(Crashes), typeof(Push));
             
             _presenter = new StartPresenter(this);
 
